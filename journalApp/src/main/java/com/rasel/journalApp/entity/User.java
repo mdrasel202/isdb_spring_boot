@@ -1,7 +1,7 @@
 package com.rasel.journalApp.entity;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.lang.NonNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +10,16 @@ import java.util.List;
 @Entity(name = "user_sl")
 public class User {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate id
     private long id;
 
-    //@Indexed(unique = true) mongoBD
-    @Column(unique = true)
-    @NonNull
+    //@Indexed(unique = true) mongoDB
+    @Column(unique = true, nullable = false)
     private String userName;
-    @NonNull
+    @Column(nullable = false)
     private String password;
 
-    //@BDRef--mongoBd
+    //@BDRef--mongoDB
     @OneToMany(mappedBy = "user") //relationship journalEntry
     private List<JournalEntry> journalEntry = new ArrayList<>();
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/journalUsr")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -26,9 +26,10 @@ public class UserController {
         userService.saveEntry(user);
     }
 
-    @PutMapping
-    private ResponseEntity<?> updateUser(@RequestBody User user){
-       User userInDB = userService.findByUserName(user.getUserName());
+    @PutMapping("/{userName}")
+    private ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable String userName){
+//       User userInDB = userService.findByUserName(user.getUserName());
+        User userInDB = userService.findByUserName(userName);
        if(userInDB != null){
            userInDB.setUserName(user.getUserName());
            userInDB.setPassword(user.getPassword());

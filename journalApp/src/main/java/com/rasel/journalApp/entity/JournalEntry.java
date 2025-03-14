@@ -1,7 +1,6 @@
 package com.rasel.journalApp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.lang.annotation.Documented;
 import java.time.LocalDate;
@@ -15,10 +14,10 @@ public class JournalEntry {
     private String title;
     private String content;
     private LocalDate date;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
-    public LocalDate getDate() {
-        return date;
-    }
+
 
     public void setDate(LocalDate date) {
         this.date = date;
