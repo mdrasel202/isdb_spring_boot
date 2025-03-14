@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import java.lang.annotation.Documented;
 import java.time.LocalDate;
 
+
 @Entity(name = "student_journal")
 public class JournalEntry {
 
