@@ -23,12 +23,21 @@ public class User {
     @OneToMany(mappedBy = "user") //relationship journalEntry
     private List<JournalEntry> journalEntry = new ArrayList<>();
 
+    public List<JournalEntry> getJournalEntry() {
+        return journalEntry;
+    }
+
+    public void setJournalEntry(List<JournalEntry> journalEntry) {
+        this.journalEntry = journalEntry;
+    }
+
     public User() {
     }
 
-    public User( String userName, String password) {
+    public User(String userName, String password, List<JournalEntry> journalEntry) {
         this.userName = userName;
         this.password = password;
+        this.journalEntry = journalEntry;
     }
 
     @NonNull

@@ -1,6 +1,7 @@
 package com.rasel.journalApp.service;
 
 import com.rasel.journalApp.entity.JournalEntry;
+import com.rasel.journalApp.entity.User;
 import com.rasel.journalApp.repository.JournalEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,17 @@ import java.util.Optional;
 public class JournalEntryService {
     @Autowired
     private JournalEntryRepository journalEntryRepository;
+
+    @Autowired
+    private UserService userService;
+
+    public void saveEntry(JournalEntry journalEntry, String userName){
+        User user = userService.findByUserName(userName);
+//        journalEntry.setDate(LocalDate.from(LocalDateTime.now()));
+        JournalEntry saved = journalEntryRepository.save(journalEntry);
+        user.getJournalEntry().add(saved);
+        userService.saveEntry(user);
+    }
 
     public void saveEntry(JournalEntry journalEntry){
         journalEntryRepository.save(journalEntry);
@@ -25,7 +37,10 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
-    public void deleteId(long id){
+    public void deleteId(long id, String userName){
+        User user = userService.findByUserName(userName);
+        user.getJournalEntry().removeIf(x -> x.getId().equals(id));
+        userService.saveEntry(user);
         journalEntryRepository.deleteById(id);
     }
 }
