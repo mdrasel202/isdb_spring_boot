@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Products {
-	private int id;
+	private Long id;
 	private String productName;
 	private double price;
-	private int quatity;
+	private Long quatity;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate purchaseDate;
 	private LocalDate sellDate;
@@ -17,7 +17,7 @@ public class Products {
 	public Products() {
 	}
 
-	public Products(int id, String productName, double price, int quatity, LocalDate purchaseDate, LocalDate sellDate,
+	public Products(Long id, String productName, double price, Long quatity, LocalDate purchaseDate, LocalDate sellDate,
 			double amount) {
 		this.id = id;
 		this.productName = productName;
@@ -28,11 +28,11 @@ public class Products {
 		this.amount = amount;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -52,11 +52,11 @@ public class Products {
 		this.price = price;
 	}
 
-	public int getQuatity() {
+	public Long getQuatity() {
 		return quatity;
 	}
 
-	public void setQuatity(int quatity) {
+	public void setQuatity(Long quatity) {
 		this.quatity = quatity;
 	}
 

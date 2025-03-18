@@ -19,7 +19,7 @@ public class ProductService {
 
 	// post
 	public Products saveAll(Products products) {
-		int save = productRepository.save(products);
+		Long save = productRepository.save(products);
 		return getProId(save);
 	}
 
@@ -30,18 +30,18 @@ public class ProductService {
 	}
 
 	// get id
-	public Products getProId(int id) {
+	public Products getProId(Long id) {
 		Optional<Products> byId = productRepository.findById(id);
 		return byId.get();
 	}
 
 	// delete
-	public void deleteById(int id) {
+	public void deleteById(Long id) {
 		productRepository.deleteById(id);
 	}
 
 	// update
-	public Products updateEmp(int id, Products products) {
+	public Products updateEmp(Long id, Products products) {
 		products.setId(id);
 		productRepository.update(products);
 		return getProId(id);
