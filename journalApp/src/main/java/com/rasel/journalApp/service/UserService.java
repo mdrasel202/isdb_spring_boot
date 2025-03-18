@@ -19,8 +19,9 @@ public class UserService {
     }
 
     //save
-    public void saveEntry(User user){
+    public String saveEntry(User user){
         userRepository.save(user);
+        return "save";
     }
 
     //delete
