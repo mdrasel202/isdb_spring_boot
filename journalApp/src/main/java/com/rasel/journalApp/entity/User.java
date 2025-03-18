@@ -11,7 +11,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate id
-    private long id;
+    private Long id;
 
     //@Indexed(unique = true) mongoDB
     @Column(unique = true, nullable = false)
