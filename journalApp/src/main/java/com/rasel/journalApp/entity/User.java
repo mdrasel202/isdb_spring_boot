@@ -1,6 +1,5 @@
 package com.rasel.journalApp.entity;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate id
-    private long id;
+    private Long id;
 
     //@Indexed(unique = true) mongoDB
     @Column(unique = true, nullable = false)

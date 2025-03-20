@@ -62,8 +62,8 @@ public class ProductRepository {
 		String sql = "UPDATE products_spri SET productName = ?, price = ?, quatity = ?, "
 				+ "purchaseDate = ?, sellDate = ?, amount = ?";
 
-		return jdbcTemplate.update(sql, products.getProductName(), products.getQuatity(), products.getPurchaseDate(),
-				products.getSellDate(), products.getAmount());
+		return jdbcTemplate.update(sql, products.getProductName(), products.getPrice(), products.getQuatity(),
+				products.getPurchaseDate(), products.getSellDate(), products.getAmount());
 	}
 
 	public int deleteById(int id) {

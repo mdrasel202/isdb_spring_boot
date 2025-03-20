@@ -2,7 +2,6 @@ package com.rasel.journalApp.entity;
 
 import jakarta.persistence.*;
 
-import java.lang.annotation.Documented;
 import java.time.LocalDate;
 
 
@@ -10,7 +9,7 @@ import java.time.LocalDate;
 public class JournalEntry {
 
     @Id
-    private long id;
+    private Long id;
     private String title;
     private String content;
     private LocalDate date;
@@ -23,11 +22,11 @@ public class JournalEntry {
         this.date = date;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

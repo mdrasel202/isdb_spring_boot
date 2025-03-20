@@ -25,12 +25,12 @@ public class UserService {
     }
 
     //delete
-    public void delete(long id){
+    public void delete(Long id){
         userRepository.deleteById(id);
     }
 
     //select
-    public Optional<User> findId(long id){
+    public Optional<User> findId(Long id){
         return userRepository.findById(id);
     }
 

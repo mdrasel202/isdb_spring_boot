@@ -33,11 +33,11 @@ public class JournalEntryService {
       return journalEntryRepository.findAll();
     }
 
-    public Optional<JournalEntry> findId(long id){
+    public Optional<JournalEntry> findId(Long id){
         return journalEntryRepository.findById(id);
     }
 
-    public void deleteId(long id, String userName){
+    public void deleteId(Long id, String userName){
         User user = userService.findByUserName(userName);
         user.getJournalEntry().removeIf(x -> x.getId().equals(id));
         userService.saveEntry(user);

@@ -11,6 +11,7 @@ public class Products {
 	private int quatity;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate purchaseDate;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate sellDate;
 	private double amount;
 
