@@ -1,4 +1,4 @@
-package com.rasel.product.repository;
+ package com.rasel.product.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +31,7 @@ public class ProductRepository {
 				.usingGeneratedKeyColumns("id");
 	}
 
-	public int save(Products products) {
+	public Long save(Products products) {
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("productName", products.getProductName());
 		parameters.put("price", products.getPrice());
@@ -41,10 +41,10 @@ public class ProductRepository {
 		parameters.put("amount", products.getAmount());
 
 		Number key = productInsert.executeAndReturnKey(parameters);
-		return key.intValue();
+		return key.longValue();
 	}
 
-	public Optional<Products> findById(int id) {
+	public Optional<Products> findById(Long id) {
 		try {
 			String sql = "SELECT * FROM products_spri WHERE ID = ?";
 			return Optional.ofNullable(jdbcTemplate.queryForObject(sql, new ProductsRowMapper(), id));
@@ -66,12 +66,12 @@ public class ProductRepository {
 				products.getPurchaseDate(), products.getSellDate(), products.getAmount());
 	}
 
-	public int deleteById(int id) {
+	public int deleteById(Long id) {
 		String sql = "DELETE FROM products_spri WHERE id = ?";
 		return jdbcTemplate.update(sql, id);
 	}
 
-	public boolean existsById(int id) {
+	public boolean existsById(Long id) {
 		String sql = "SELECT COUNT(*) FROM products_spri WHERE id = ?";
 		Integer count = jdbcTemplate.queryForObject(sql, Integer.class, id);
 		return count != null && count > 0;
@@ -85,8 +85,8 @@ public class ProductRepository {
 	private static class ProductsRowMapper implements RowMapper<Products> {
 		@Override
 		public Products mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return new Products(rs.getInt("id"), rs.getString("productName"), rs.getDouble("price"),
-					rs.getInt("quatity"), rs.getObject("purchaseDate", LocalDate.class),
+			return new Products(rs.getLong("id"), rs.getString("productName"), rs.getDouble("price"),
+					rs.getLong("quatity"), rs.getObject("purchaseDate", LocalDate.class),
 					rs.getObject("sellDate", LocalDate.class), rs.getDouble("amount"));
 		}
 	}
@@ -100,7 +100,7 @@ public class ProductRepository {
 			// Set the parameters
 			preparedStatement.setString(1, products.getProductName());
 			preparedStatement.setDouble(2, products.getPrice());
-			preparedStatement.setInt(3, products.getQuatity());
+			preparedStatement.setLong(3, products.getQuatity());
 			preparedStatement.setObject(6, products.getPurchaseDate());
 			preparedStatement.setObject(6, products.getSellDate());
 			preparedStatement.setDouble(7, products.getAmount());
@@ -115,7 +115,7 @@ public class ProductRepository {
 			// Get the generated ID
 			try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
 				if (generatedKeys.next()) {
-					int id = generatedKeys.getInt(1);
+					Long id = generatedKeys.getLong(1);
 
 					// Set the ID in the employee object
 					Products savedProducts = new Products(id, products.getProductName(), products.getPrice(),

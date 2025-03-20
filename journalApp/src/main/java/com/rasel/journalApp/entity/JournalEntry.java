@@ -14,6 +14,7 @@ public class JournalEntry {
     private String content;
     private LocalDate date;
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User user;
 
 

@@ -63,12 +63,21 @@
 	    <version>2.16.1</version>
 	</dependency>
 	
-	 <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc11 -->
+	
+
+	 <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc11 
 	<dependency>
 	    <groupId>com.oracle.database.jdbc</groupId>
 	    <artifactId>ojdbc11</artifactId>
 	    <version>23.7.0.25.01</version>
 	</dependency>
+	-->
+<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.7.5</version>
+</dependency>
 
 	<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
 	<dependency>

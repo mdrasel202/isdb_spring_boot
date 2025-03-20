@@ -12,17 +12,26 @@
 
 	<!-- Enable component scanning and annotations -->
 	<context:component-scan
-		base-package="com.rasel" />
+		base-package="com.rasel.product" />
 	<mvc:annotation-driven />
 
 	<!-- DataSource configuration -->
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+	<!-- <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
 		<property name="driverClassName"
 			value="oracle.jdbc.OracleDriver" />
 		<property name="jdbcUrl"
 			value="jdbc:oracle:thin:@//localhost:1521/ORCLPDB" />
 		<property name="username" value="orclpdbuser" />
 		<property name="password" value="isdb62" />
+	</bean> -->
+	<!-- DataSource configuration -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName"
+			value="org.postgresql.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:postgresql://localhost:5432/postgres" />
+		<property name="username" value="postgres" />
+		<property name="password" value="raselabc202" />
 	</bean>
 
 	<!-- JdbcTemplate configuration -->
