@@ -6,6 +6,8 @@ import com.rasel.journalApp.repository.JournalEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +21,8 @@ public class JournalEntryService {
 
     public void saveEntry(JournalEntry journalEntry, String userName){
         User user = userService.findByUserName(userName);
-
-//        journalEntry.setDate(LocalDate.from(LocalDateTime.now()));
+        journalEntry.setUser(user);
+        journalEntry.setDate(LocalDate.from(LocalDateTime.now()));
         JournalEntry saved = journalEntryRepository.save(journalEntry);
         user.getJournalEntry().add(saved);
         userService.saveEntry(user);

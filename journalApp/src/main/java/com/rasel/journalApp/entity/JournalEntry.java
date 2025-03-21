@@ -46,4 +46,16 @@ public class JournalEntry {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
