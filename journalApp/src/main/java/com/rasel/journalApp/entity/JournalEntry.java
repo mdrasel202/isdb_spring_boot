@@ -18,11 +18,6 @@ public class JournalEntry {
     private User user;
 
 
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     public Long getId() {
         return id;
     }
@@ -51,6 +46,10 @@ public class JournalEntry {
         return date;
     }
 
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public User getUser() {
         return user;
     }
@@ -59,3 +58,4 @@ public class JournalEntry {
         this.user = user;
     }
 }
+
