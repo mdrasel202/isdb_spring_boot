@@ -3,6 +3,9 @@ package com.rasel.student_management.model;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.rasel.student_management.config.InstantDeserializer;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +35,7 @@ public class Teacher {
     private String address;
     @Column(nullable = false)
     private String phone;
+    @JsonDeserialize(using = InstantDeserializer.class)
     @Column(name = "joining_date", nullable = false, updatable = false)
     private Instant joiningDate;
     @Column(nullable = false)

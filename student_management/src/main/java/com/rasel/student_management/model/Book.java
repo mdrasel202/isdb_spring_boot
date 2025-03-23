@@ -32,9 +32,10 @@ public class Book {
     @Column(nullable = false, length = 50)
     private String publisher;
 
+    // @Transient database hide obostai takbe coloum dekabe na 
     @OneToOne
     @JoinColumn(name = "class", referencedColumnName = "id", nullable = false)
-    private Class clazz;
+    private Clazz clazz;
 
     @ManyToOne
     @JoinColumn(name = "student", nullable = false)

@@ -17,7 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "T_CLASS")
-public class Class {
+public class Clazz {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
