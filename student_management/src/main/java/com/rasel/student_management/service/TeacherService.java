@@ -36,6 +36,7 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
+    //update
     public Teacher updateTeacher(Integer id, Teacher teacher) {
         Teacher teacherById = teacherRepository.findById(id).orElse(null);
 

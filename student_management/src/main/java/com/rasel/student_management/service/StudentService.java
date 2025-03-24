@@ -37,6 +37,9 @@ public class StudentService {
 
     public Student updaStudent(Integer id, Student student) {
         Student studentBy = studentRepository.findById(id).orElse(null);
+        if(studentBy != null){
+
+        }
         return null;
     }
 }

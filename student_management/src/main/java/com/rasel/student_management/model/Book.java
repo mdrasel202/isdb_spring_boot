@@ -35,7 +35,7 @@ public class Book {
     // @Transient database hide obostai takbe coloum dekabe na 
     @OneToOne
     @JoinColumn(name = "class", referencedColumnName = "id", nullable = false)
-    private Clazz clazz;
+    private StudentClass studentClass;
 
     @ManyToOne
     @JoinColumn(name = "student", nullable = false)

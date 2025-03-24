@@ -34,7 +34,7 @@ public class Student {
 
     @OneToOne
     @JoinColumn(name = "clazz", nullable = false, referencedColumnName = "id")
-    private Clazz clazz;
+    private StudentClass studentClass;
 
     @Column(nullable = false, length = 30, unique = true)
     private Integer roll;

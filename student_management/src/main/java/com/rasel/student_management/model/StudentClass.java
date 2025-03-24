@@ -17,12 +17,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "T_CLASS")
-public class Clazz {
+public class StudentClass {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String name;
 
     @OneToOne
@@ -31,5 +31,5 @@ public class Clazz {
     private Teacher classTeacher;
 
     @Column(name = "room_number", nullable = false, unique = true, length = 10)
-    private String roomNumber;
+    private Integer roomNumber;
 }
