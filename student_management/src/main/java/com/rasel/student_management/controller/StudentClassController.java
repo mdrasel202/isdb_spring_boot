@@ -3,6 +3,7 @@ package com.rasel.student_management.controller;
 import com.rasel.student_management.dto.StudentClassDTO;
 import com.rasel.student_management.model.StudentClass;
 import com.rasel.student_management.service.StudentClassService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class StudentClassController {
 
     //post
     @PostMapping
-    public ResponseEntity<?> saveStudentClass(@RequestBody StudentClassDTO classDTO){
+    public ResponseEntity<?> saveStudentClass(@Valid @RequestBody StudentClassDTO classDTO){
         StudentClass saves = studentClassService.saveStudentClass(classDTO);
         return new ResponseEntity<>(saves, HttpStatus.CREATED);
     }

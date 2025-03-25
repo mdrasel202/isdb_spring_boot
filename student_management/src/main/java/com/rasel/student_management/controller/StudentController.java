@@ -2,6 +2,9 @@ package com.rasel.student_management.controller;
 
 import java.util.List;
 
+import com.rasel.student_management.dto.StudentDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,31 +29,36 @@ public class StudentController {
 
     //post
     @PostMapping
-    public Student saveStudent(@RequestBody Student student){
-        return studentService.saveStudent(student);
+    public ResponseEntity<Student> saveStudent(@RequestBody StudentDTO studentDTO){
+        Student saved = studentService.saveStudent(studentDTO);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     //get
     @GetMapping("/{id}")
-    public Student getStudent(@PathVariable Integer id){
-        return studentService.getStudent(id);
+    public ResponseEntity<Student> getStudent(@PathVariable Integer id){
+        Student student = studentService.getStudent(id);
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     //delete
     @DeleteMapping("/{id}")
-    public void deleteStudent(@PathVariable Integer id){
+    public ResponseEntity<Student> deleteStudent(@PathVariable Integer id){
         studentService.deleteStudent(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     //get All Student
     @GetMapping
-    public List<Student> getAllStudent(){
-        return studentService.getAllStudent();
+    public ResponseEntity<List<Student>> getAllStudent(){
+        List<Student> students = studentService.getAllStudent();
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
     //put
     @PutMapping("/{id}")
-    public Student updaStudent(@PathVariable Integer id, @RequestBody Student student){
-        return studentService.updaStudent(id, student);
+    public ResponseEntity<Student> updaStudent(@PathVariable Integer id, @RequestBody StudentDTO studentDTO){
+        Student updated = studentService.updaStudent(id, studentDTO);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 }
