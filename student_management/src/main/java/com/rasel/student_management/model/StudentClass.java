@@ -1,12 +1,6 @@
 package com.rasel.student_management.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +10,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "T_CLASS")
-public class Clazz {
+@Entity
+@Table(name = "T_CLASS")
+public class StudentClass {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String name;
 
     @OneToOne
@@ -31,5 +26,5 @@ public class Clazz {
     private Teacher classTeacher;
 
     @Column(name = "room_number", nullable = false, unique = true, length = 10)
-    private String roomNumber;
+    private Integer roomNumber;
 }

@@ -1,5 +1,7 @@
 package com.rasel.student_management.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +32,9 @@ public class TeacherController {
 
     //Post
     @PostMapping
-    public Teacher saveTeacher(@RequestBody Teacher teacher){
-        return teacherService.saveTeacher(teacher);
+    public ResponseEntity<?> saveTeacher(@RequestBody Teacher teacher){
+        Teacher save = teacherService.saveTeacher(teacher);
+        return new ResponseEntity<>(save, HttpStatus.CREATED);
     }
 
     //get
@@ -42,8 +45,9 @@ public class TeacherController {
 
     //delete
     @DeleteMapping("/{id}")
-    public void deleteTeacher(@PathVariable Integer id){
-        teacherService.deleteTeacher(id);
+    public ResponseEntity<?> deleteTeacher(@PathVariable Integer id){
+         teacherService.deleteTeacher(id);
+         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     //getAllmapping
