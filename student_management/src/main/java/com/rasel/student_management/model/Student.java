@@ -3,14 +3,7 @@ package com.rasel.student_management.model;
 import java.time.Instant;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +13,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "T_STUDENT")
+@Entity
+@Table(name = "T_STUDENT")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

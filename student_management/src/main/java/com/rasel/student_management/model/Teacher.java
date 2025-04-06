@@ -6,11 +6,7 @@ import java.time.Instant;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.rasel.student_management.config.InstantDeserializer;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +16,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "T_TEACHER")
+@Entity
+@Table(name = "T_TEACHER")
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

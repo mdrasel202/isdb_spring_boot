@@ -1,5 +1,7 @@
 package com.rasel.student_management.service;
 
+import com.rasel.student_management.dao.ClassTeacher;
+import com.rasel.student_management.dao.ClassTeacherProjection;
 import com.rasel.student_management.dto.StudentClassDTO;
 import com.rasel.student_management.model.StudentClass;
 import com.rasel.student_management.model.Teacher;
@@ -77,5 +79,9 @@ public class StudentClassService {
        }else{
            throw new IllegalArgumentException("Class not found");
        }
+    }
+
+    public List<ClassTeacherProjection> getAllClassTeacher() {
+        return studentClassRepository.getAllClassTeacher();
     }
 }
