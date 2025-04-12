@@ -108,7 +108,7 @@ public class AdvancedSecurityController {
 	 * Demonstrates a method that requires multiple roles
 	 */
 	@GetMapping("/system/config")
-	@PreAuthorize("hasRole('ADMIN') and hasAuthority('SYSTEM_CONFIG')")
+	@PreAuthorize("hasRole('REGULAR_USER') and hasAuthority('SENIOR')")
 	public Map<String, String> getSystemConfig() {
 		Map<String, String> config = new HashMap<>();
 		config.put("maintenance", "false");
