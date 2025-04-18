@@ -6,6 +6,10 @@ import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,7 +29,7 @@ public class EmailController {
 //            return ResponseEntity.internalServerError().body("Failed to send email: " + e.getMessage());
 //        }
 //    }
-@PostMapping(value = "/send-email", consumes = "multipart/form-data")
+@PostMapping(value = "/send-email-attachment", consumes = "multipart/form-data")
 public ResponseEntity<String> sendEmailWithAttachment(@ModelAttribute EmailRequest request, MultipartFile file) {
     try {
         emailService.sendEmailWithAttachment(request.getTo(), request.getSubject(), request.getBody(), file);
@@ -34,5 +38,4 @@ public ResponseEntity<String> sendEmailWithAttachment(@ModelAttribute EmailReque
         return ResponseEntity.internalServerError().body("Failed to send email: " + e.getMessage());
     }
 }
-
 }
