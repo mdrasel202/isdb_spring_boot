@@ -1,8 +1,7 @@
 package com.rasel.second_spring.controller;
 
-//import org.isdb.StudentCRUD.config.JwtTokenProvider;
-//import org.isdb.StudentCRUD.model.LoginRequest;
 import com.rasel.second_spring.config.JwtTokenProvider;
+import com.rasel.second_spring.model.CustomUserDetails;
 import com.rasel.second_spring.model.LoginRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,6 +34,11 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())
         );
+
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof CustomUserDetails) {
+            System.out.println("User is instance of CustomUserDetails");
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtTokenProvider.createToken(authentication);
