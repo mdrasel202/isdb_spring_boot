@@ -1,0 +1,137 @@
+<!-- Created with Jaspersoft Studio version 7.0.2.final using JasperReports Library version 7.0.2-31532122640f516c6d17238ae0e41a08113d5ac0  -->
+<jasperReport name="Blank_A4_2" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab7d40ea-c249-4051-8c49-e547fb1f3f39">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="IkhSIi4iSk9CUyIgQVMgLDIwMSwxMzcsMWJjZGFjNTAtNjIzMS00NDgxLWJhOGUtYjZjOWFlMTg1&#xa;ZGQ5Ow=="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter1.jrdax"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#5F9EA0">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFFDFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<dataset name="Dataset1" uuid="ddc6d318-53a8-4131-80c8-6f5544fd8ee2">
+		<property name="com.jaspersoft.studio.data.sql.tables" value="IkhSIi4iSk9CUyIgQVMgLDE0OSwxMDcsMzU1OWNmNmMtMmZkMi00M2Y5LTg5ZGMtNzg5OTk3M2Qw&#xa;Yzk1Ow=="/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter1.jrdax"/>
+		<query language="SQL"><![CDATA[SELECT "JOB_ID",
+	"JOB_TITLE",
+	"MIN_SALARY",
+	"MAX_SALARY"
+FROM "HR"."JOBS"]]></query>
+		<field name="JOB_ID" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="JOB_ID"/>
+			<property name="com.jaspersoft.studio.field.label" value="JOB_ID"/>
+		</field>
+		<field name="JOB_TITLE" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="JOB_TITLE"/>
+			<property name="com.jaspersoft.studio.field.label" value="JOB_TITLE"/>
+		</field>
+		<field name="MIN_SALARY" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="MIN_SALARY"/>
+			<property name="com.jaspersoft.studio.field.label" value="MIN_SALARY"/>
+		</field>
+		<field name="MAX_SALARY" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.name" value="MAX_SALARY"/>
+			<property name="com.jaspersoft.studio.field.label" value="MAX_SALARY"/>
+		</field>
+	</dataset>
+	<query language="SQL"><![CDATA[SELECT "JOB_ID",
+	"JOB_TITLE",
+	"MIN_SALARY",
+	"MAX_SALARY"
+FROM "HR"."JOBS"]]></query>
+	<field name="JOB_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="JOB_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="JOB_ID"/>
+	</field>
+	<field name="JOB_TITLE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="JOB_TITLE"/>
+		<property name="com.jaspersoft.studio.field.label" value="JOB_TITLE"/>
+	</field>
+	<field name="MIN_SALARY" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="MIN_SALARY"/>
+		<property name="com.jaspersoft.studio.field.label" value="MIN_SALARY"/>
+	</field>
+	<field name="MAX_SALARY" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="MAX_SALARY"/>
+		<property name="com.jaspersoft.studio.field.label" value="MAX_SALARY"/>
+	</field>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="6edb19a9-6c75-4e04-b732-6d9064080035" x="10" y="0" width="535" height="59" fontSize="33.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Sample Reprot]]></text>
+		</element>
+	</title>
+	<summary height="203">
+		<element kind="component" uuid="a6ab4888-291f-4c2a-8d7b-6b81d39e2ecc" x="10" y="1" width="540" height="200">
+			<component kind="table" horizontalPosition="Center">
+				<datasetRun uuid="d1beca98-5a08-44d6-a795-998e770bd6a4" subDataset="Dataset1">
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				</datasetRun>
+				<column kind="single" uuid="9a6e577f-8211-43b8-8614-dd3645dcce24" width="135">
+					<columnHeader height="30" style="Table_CH">
+						<element kind="staticText" uuid="2213182b-8b40-4230-ae82-7db633426607" x="0" y="0" width="135" height="30" hTextAlign="Center">
+							<text><![CDATA[JOB_ID]]></text>
+						</element>
+					</columnHeader>
+					<detailCell height="30" style="Table_TD">
+						<element kind="textField" uuid="4fca174c-b9bb-481e-b66c-2b9c72c3cb47" x="0" y="0" width="135" height="30" hTextAlign="Center">
+							<expression><![CDATA[$F{JOB_ID}]]></expression>
+						</element>
+					</detailCell>
+				</column>
+				<column kind="single" uuid="fc109e79-659f-49e5-9ddd-d315f6aab103" width="135">
+					<columnHeader height="30" style="Table_CH">
+						<element kind="staticText" uuid="5eeb28d0-576a-4577-8f2e-eff20d44f9cc" x="0" y="0" width="135" height="30" hTextAlign="Center">
+							<text><![CDATA[JOB_TITLE]]></text>
+						</element>
+					</columnHeader>
+					<detailCell height="30" style="Table_TD">
+						<element kind="textField" uuid="9f862337-cf3f-4327-905a-a1d1852d3ada" x="0" y="0" width="135" height="30" hTextAlign="Center">
+							<expression><![CDATA[$F{JOB_TITLE}]]></expression>
+						</element>
+					</detailCell>
+				</column>
+				<column kind="single" uuid="3e17ba48-4f88-4b0f-b0ac-5938869ddecb" width="135">
+					<columnHeader height="30" style="Table_CH">
+						<element kind="staticText" uuid="66615ceb-1f22-444f-931d-5833612dc33e" x="0" y="0" width="135" height="30" hTextAlign="Center">
+							<text><![CDATA[MIN_SALARY]]></text>
+						</element>
+					</columnHeader>
+					<detailCell height="30" style="Table_TD">
+						<element kind="textField" uuid="5363dfa2-6628-4277-8a59-4c7b9c9869dc" x="0" y="0" width="135" height="30" hTextAlign="Center">
+							<expression><![CDATA[$F{MIN_SALARY}]]></expression>
+						</element>
+					</detailCell>
+				</column>
+				<column kind="single" uuid="3e225ad7-29d6-41be-a75d-cf5babad31b3" width="135">
+					<columnHeader height="30" style="Table_CH">
+						<element kind="staticText" uuid="181e32ef-0a41-4feb-938f-df7b4c0cd6da" x="0" y="0" width="135" height="30" hTextAlign="Center">
+							<text><![CDATA[MAX_SALARY]]></text>
+						</element>
+					</columnHeader>
+					<detailCell height="30" style="Table_TD">
+						<element kind="textField" uuid="5fd22ae9-9a18-44fd-931e-3177fbe573cd" x="0" y="0" width="135" height="30" hTextAlign="Center">
+							<expression><![CDATA[$F{MAX_SALARY}]]></expression>
+						</element>
+					</detailCell>
+				</column>
+			</component>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+			<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+			<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+			<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+			<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+		</element>
+	</summary>
+</jasperReport>
