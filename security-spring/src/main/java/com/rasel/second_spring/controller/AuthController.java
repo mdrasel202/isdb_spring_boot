@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -49,7 +50,7 @@ public class AuthController {
             User user = new User(
                     registerRequest.email(),
                     registerRequest.password(),
-                    Role.STUDENT, // Default role for registration
+                    registerRequest.role(), // Default role for registration
                     registerRequest.firstName(),
                     registerRequest.lastName(),
                     registerRequest.phoneNumber()
@@ -90,7 +91,7 @@ public class AuthController {
 
             // Create response with token and user info
             Map<String, Object> responseData = new HashMap<>();
-            responseData.put("token", jwt);
+            responseData.put("access_token", jwt);
             responseData.put("tokenType", "Bearer");
 
             // Add user information
