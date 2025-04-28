@@ -40,12 +40,12 @@ public class UserController {
     //delete
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Integer id){
-        User users = userService.deleteUser(id);
-        return new ResponseEntity<>(users, HttpStatus.NO_CONTENT);
+               userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     //put
-    @PutMapping(/{"id"})
+    @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user){
         User update = userService.updateUser(id, user);
         return new ResponseEntity<>(update, HttpStatus.OK);

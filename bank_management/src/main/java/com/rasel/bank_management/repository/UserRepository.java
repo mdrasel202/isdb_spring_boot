@@ -1,4 +1,7 @@
 package com.rasel.bank_management.repository;
 
-public class UserRepository {
+import com.rasel.bank_management.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
 }

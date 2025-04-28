@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.Length;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,4 +38,7 @@ public class User {
 
     @Column(name = "birth_day", nullable = false)
     private Date birthDay;
+
+    @OneToMany(mappedBy = "user")
+    private List<BankAccount> bankAccounts;
 }
