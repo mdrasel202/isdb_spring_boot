@@ -1,13 +1,12 @@
-package com.rasel.second_spring.config;
+package com.rasel.bank_management.config;
 
-import com.rasel.second_spring.model.CustomUserDetails;
+import com.rasel.bank_management.model.CustomUserDetails;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -16,26 +15,23 @@ import java.util.Date;
 @Slf4j
 @Component
 public class JwtTokenProvider {
-
     private final SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
-
-    public String createToken(Authentication authentication) {
+    public String createToken(Authentication authentication){
         CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
-
 
         return Jwts.builder()
                 .setSubject(userPrincipal.getUsername())
                 .claim("id", userPrincipal.getId())
                 .claim("email", userPrincipal.getEmail())
-                .claim("role", userPrincipal.getRole().name())
+                .claim("role", userPrincipal.getRole())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis()+24*60*60*1000))
                 .signWith(secretKey)
                 .compact();
     }
 
-    public String getUsernameFromToken(String token) {
+    public String getUsernameFromToken(String token){
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
@@ -45,14 +41,14 @@ public class JwtTokenProvider {
         return claims.getSubject();
     }
 
-    public boolean validateToken(String token) {
-        try {
+    public boolean validateToken(String token){
+        try{
             Jwts.parserBuilder()
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token);
             return true;
-        } catch (SecurityException ex) {
+        }catch (SecurityException ex) {
             log.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
             log.error("Invalid JWT token");
@@ -66,7 +62,7 @@ public class JwtTokenProvider {
         return false;
     }
 
-    public Claims getClaimsFromToken(String token) {
+    public Claims getClaimsFromToken(String token){
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
