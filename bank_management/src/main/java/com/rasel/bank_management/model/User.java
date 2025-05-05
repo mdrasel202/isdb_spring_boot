@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.Length;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -52,15 +52,29 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<BankAccount> bankAccounts;
 
-    public User(List<BankAccount> bankAccounts, String firstName, String lastName, String email, String password, Role role, String phone, String address, Date birthDay) {
-        this.bankAccounts = bankAccounts;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    public User( String email, String password, Role role,String firstName,String lastName, String phone) {
         this.email = email;
         this.password = password;
         this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phone = phone;
-        this.address = address;
-        this.birthDay = birthDay;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 }

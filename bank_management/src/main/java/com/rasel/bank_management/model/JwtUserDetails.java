@@ -16,71 +16,30 @@ public class JwtUserDetails implements UserDetails {
     private final Integer id;
     private final String username;
     private final String email;
-    private final Role role;
+    private final String role;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public JwtUserDetails(Integer id, String username, String email, Role role, Collection<? extends GrantedAuthority> authorities) {
+    public JwtUserDetails(Integer id, String username, String email, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.role = role;
-        this.authorities = authorities;
+        this.authorities =  Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return "";
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return username;
     }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-  /*  private final Integer id;
-    private final String username;
-    private final String email;
-    private final Role role;
-    private final Collection<? extends GrantedAuthority> authorities;
-
-    public JwtUserDetails(Integer id, String username, String email, Role role) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.role = role;
-        this.authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.name()));
-
-        @Override
-        public Collection<? extends GrantedAuthority> grantedAuthorities(){
-            return authorities;
-        }
-
-
-    }
-*/
 
 }
