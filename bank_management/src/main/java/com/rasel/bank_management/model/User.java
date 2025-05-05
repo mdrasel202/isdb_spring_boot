@@ -1,5 +1,6 @@
 package com.rasel.bank_management.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rasel.bank_management.constants.Role;
 import jakarta.persistence.*;
@@ -9,8 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -46,11 +45,12 @@ public class User {
     @Column(length = 100)
     private String address;
 
-    @Column(name = "birth_day", nullable = false)
-    private Date birthDay;
+    @Column(name = "birth_day")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDateTime birthDay;
 
-    @OneToMany(mappedBy = "user")
-    private List<BankAccount> bankAccounts;
+//    @OneToMany(mappedBy = "user")
+//    private List<BankAccount> bankAccounts;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

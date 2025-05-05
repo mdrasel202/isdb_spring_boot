@@ -53,7 +53,7 @@ public class AuthController {
                     registerRequest.role(), // Default role for registration
                     registerRequest.firstName(),
                     registerRequest.lastName(),
-                    registerRequest.phoneNumber()
+                    registerRequest.phone()
             );
 
             User savedUser = userService.createUser(user);
@@ -65,7 +65,7 @@ public class AuthController {
             userResponse.setRole(savedUser.getRole());
             userResponse.setFirstName(savedUser.getFirstName());
             userResponse.setLastName(savedUser.getLastName());
-            userResponse.setPhoneNumber(savedUser.getPhone());
+            userResponse.setPhone(savedUser.getPhone());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
         } catch (RuntimeException e) {

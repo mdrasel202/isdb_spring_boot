@@ -148,7 +148,7 @@ public class UserController {
         dto.setRole(user.getRole());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
-        dto.setPhoneNumber(user.getPhone());
+        dto.setPhone(user.getPhone());
         dto.setCreatedAt(user.getCreatedAt());
         dto.setUpdatedAt(user.getUpdatedAt());
         return dto;

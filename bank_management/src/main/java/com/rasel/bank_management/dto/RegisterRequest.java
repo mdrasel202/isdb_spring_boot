@@ -17,7 +17,7 @@ public record RegisterRequest(
         Role role,
         String firstName,
         String lastName,
-        String phoneNumber
+        String phone
 ) {
 
 }
