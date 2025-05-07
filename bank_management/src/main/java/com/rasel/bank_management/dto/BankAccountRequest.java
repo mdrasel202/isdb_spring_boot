@@ -11,8 +11,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankAccountRequest {
-    private Integer id;
+public class BankAccountRequest{
     private String name;
     private String email;
     private String phone;

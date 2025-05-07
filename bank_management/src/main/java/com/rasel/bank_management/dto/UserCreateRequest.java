@@ -22,7 +22,6 @@ public record UserCreateRequest(
 
         @NotNull(message = "Role cannot be null")
         Role role,
-
         String firstName,
         String lastName,
         String phoneNumber

@@ -1,5 +1,7 @@
 package com.rasel.bank_management.model;
 
+import com.rasel.bank_management.constants.AccountStatus;
+import com.rasel.bank_management.constants.AccountType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +10,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -27,19 +30,17 @@ public class BankAccount {
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    private String type;
+    private AccountType type;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
+    private AccountStatus status;
 
     @Column(nullable = false)
-    private String currency;
+    private BigDecimal availableBalance;
 
     @Column(nullable = false)
-    private String status;
-
-    @Column(nullable = false)
-    private BigDecimal balance;
-
-    @Column(nullable = false)
-    private BigDecimal available_balance;
-
+    private LocalDate openedDate;
 }
