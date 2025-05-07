@@ -1,7 +1,9 @@
 package com.rasel.bank_management.controller;
 
+import com.rasel.bank_management.dto.BankAccountRequest;
 import com.rasel.bank_management.model.BankAccount;
 import com.rasel.bank_management.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/bank")
-public class AccountController {
+public class BankAccountController {
     private final AccountService accountService;
 
-    public AccountController(AccountService accountService){
+    public BankAccountController(AccountService accountService){
         this.accountService = accountService;
     }
 
@@ -26,9 +28,11 @@ public class AccountController {
 
      //post
     @PostMapping("/{account}")
-    public ResponseEntity<BankAccount> saveAccount(@PathVariable BankAccount bankAccount){
-        BankAccount save = accountService.saveAccount(bankAccount);
-        return new ResponseEntity<>(save, HttpStatus.CREATED);
+    public ResponseEntity<BankAccount> saveAccount(@Valid @RequestBody BankAccountRequest bankAccountRequest){
+       BankAccount bankAccount = new BankAccount(
+               bankAccountRequest.,
+               bankAccountRequest.email()
+       )
     }
 
     //get All
