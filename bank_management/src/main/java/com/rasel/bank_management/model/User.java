@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -49,8 +50,8 @@ public class User {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime birthDay;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<BankAccount> bankAccounts;
+    @OneToMany(mappedBy = "user")
+    private List<BankAccount> bankAccounts;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
