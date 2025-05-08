@@ -30,8 +30,7 @@ public class BankAccountController {
     @PostMapping("/{account}")
     public ResponseEntity<BankAccount> saveAccount(@Valid @RequestBody BankAccountRequest bankAccountRequest){
        BankAccount bankAccount = new BankAccount(
-               bankAccountRequest.,
-               bankAccountRequest.email()
+               bankAccountRequest.
        )
     }
 
