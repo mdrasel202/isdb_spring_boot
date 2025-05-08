@@ -25,5 +25,6 @@ public class BankAccountRequest{
     private LocalDate birthDay;
     private AccountStatus accountStatus;
     private AccountType accountType;
-    private String
+    private String firstName;
+    private String lastName;
 }

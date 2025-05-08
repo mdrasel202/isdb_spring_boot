@@ -29,9 +29,10 @@ public class BankAccountController {
      //post
     @PostMapping("/{account}")
     public ResponseEntity<BankAccount> saveAccount(@Valid @RequestBody BankAccountRequest bankAccountRequest){
-       BankAccount bankAccount = new BankAccount(
-               bankAccountRequest.
-       )
+       BankAccount bankAccount = new BankAccount();
+       bankAccount.setAccountNumber(bankAccountRequest.getAccountNumber());
+       bankAccount.setAvailableBalance(bankAccountRequest.getAvailableBalance());
+       bankAccount.
     }
 
     //get All
