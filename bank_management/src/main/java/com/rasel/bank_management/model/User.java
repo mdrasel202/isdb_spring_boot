@@ -50,14 +50,17 @@ public class User {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime birthDay;
 
-    @OneToMany(mappedBy = "user")
-    private List<BankAccount> bankAccounts;
-
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "user")
+    private List<BankAccount> bankAccounts;
+
+    @OneToMany(mappedBy = "user")
+    private List<Loan> loan;
 
     public User( String email, String password, Role role,String firstName,String lastName, String phone) {
         this.email = email;

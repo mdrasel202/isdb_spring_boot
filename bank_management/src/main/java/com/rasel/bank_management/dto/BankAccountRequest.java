@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BankAccountRequest{
+    public String getEmail;
     private String accountNumber;
     private BigDecimal availableBalance;
     private LocalDate openedDate;

@@ -29,6 +29,10 @@ public class BankAccount {
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
+    @OneToMany
+    @JoinColumn(name = "card", nullable = false)
+    private Card card;
+
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     private AccountType type;
