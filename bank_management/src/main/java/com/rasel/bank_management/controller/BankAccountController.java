@@ -7,7 +7,6 @@ import com.rasel.bank_management.model.BankAccount;
 import com.rasel.bank_management.model.User;
 import com.rasel.bank_management.service.AccountService;
 import com.rasel.bank_management.service.EmailService;
-import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,17 +39,23 @@ public class BankAccountController {
         user.setFirstName(bankAccountRequest.getFirstName());
         user.setLastName(bankAccountRequest.getLastName());
         user.setPhone(bankAccountRequest.getPhone());
-//        user.setEmail(bankAccountRequest.getEmail());
+        user.setEmail("placeholder@example.com"); // Or request.getEmail() if you include it
         user.setPhone(bankAccountRequest.getPhone());
         user.setAddress(bankAccountRequest.getAddress());
+        user.setPassword("default123"); // In real app, encode and set
         user.setRole(Role.USER);
 
+//        User savedUser = userRepository.save(user);
 
        BankAccount bankAccount = new BankAccount();
-       bankAccount.setAccountNumber(bankAccountRequest.getAccountNumber());
-       bankAccount.setAvailableBalance(bankAccountRequest.getAvailableBalance());
+        bankAccount.setAccountNumber(bankAccountRequest.getAccountNumber());
+        bankAccount.setAvailableBalance(bankAccountRequest.getAvailableBalance());
+        bankAccount.setOpenedDate(bankAccountRequest.getOpenedDate());
+        bankAccount.setStatus(bankAccountRequest.getAccountStatus());
+        bankAccount.setType(bankAccountRequest.getAccountType());
+//        bankAccount.setUser(User);
 //       bankAccount.
-
+        BankAccount savedAccount = accountService.saveAccount(bankAccount);
 
         try {
             emailService.sendEmailWithAttachment("himusharier@gmail.com", "welcome email", "your account has been created.");
