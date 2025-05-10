@@ -2,8 +2,6 @@ package com.rasel.bank_management.dto;
 
 import com.rasel.bank_management.constants.AccountStatus;
 import com.rasel.bank_management.constants.AccountType;
-import com.rasel.bank_management.constants.Role;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BankAccountRequest{
-    public String getEmail;
+    public String email;
     private String accountNumber;
     private BigDecimal availableBalance;
     private LocalDate openedDate;

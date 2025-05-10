@@ -1,5 +1,6 @@
 package com.rasel.bank_management.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rasel.bank_management.constants.AccountStatus;
 import com.rasel.bank_management.constants.AccountType;
 import jakarta.persistence.*;
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,9 +31,9 @@ public class BankAccount {
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    @OneToMany
-    @JoinColumn(name = "card", nullable = false)
-    private Card card;
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL)
+//    @JoinColumn(name = "card", nullable = false)
+    private List<Card> card;
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
@@ -44,6 +46,8 @@ public class BankAccount {
     @Column(nullable = false)
     private BigDecimal availableBalance;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private LocalDate openedDate;
+
 }

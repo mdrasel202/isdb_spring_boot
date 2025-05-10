@@ -49,20 +49,16 @@ public class AccountService {
 
 //            if(bankAccount)
 
-            if(bankAccount.getCurrency() != null){
-                bankAccount1.setCurrency(bankAccount.getCurrency());
-            }
-
             if(bankAccount.getStatus() != null){
                 bankAccount1.setStatus(bankAccount.getStatus());
             }
 
-            if(bankAccount.getBalance() != null){
-                bankAccount1.setBalance(bankAccount.getBalance());
+            if(bankAccount.getAvailableBalance() != null){
+                bankAccount1.setAvailableBalance(bankAccount.getAvailableBalance());
             }
 
-            if(bankAccount.getAvailable_balance() != null){
-                bankAccount1.setAvailable_balance(bankAccount.getAvailable_balance());
+            if(bankAccount.getOpenedDate() != null){
+                bankAccount1.setOpenedDate(bankAccount.getOpenedDate());
             }
             return accountRepository.save(bankAccount1);
         }else {

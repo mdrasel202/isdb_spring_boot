@@ -1,5 +1,6 @@
 package com.rasel.bank_management.model;
 
+import com.rasel.bank_management.constants.LoanStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,5 +40,6 @@ public class Loan {
 
     private LocalDate dueDate;
 
-    private Loan status;
+    @Enumerated(value = EnumType.STRING)
+    private LoanStatus status;
 }

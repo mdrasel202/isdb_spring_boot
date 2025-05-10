@@ -41,7 +41,7 @@ public class BankAccountController {
      }
 
      //post
-    @PostMapping("/{account}")
+    @PostMapping
     public ResponseEntity<BankAccount> saveAccount(@Valid @RequestBody BankAccountRequest bankAccountRequest)
             throws MessagingException, GeneralSecurityException, IOException {
         User user = new User();
@@ -67,8 +67,9 @@ public class BankAccountController {
         BankAccount savedAccount = accountService.saveAccount(bankAccount);
 
         try {
-            emailService.sendEmailWithAttachment("himusharier@gmail.com", "welcome email", "your account has been created.");
+            emailService.sendEmailWithAttachment("raselabc204@gmail.com", "welcome email", "your account has been created.");
         } catch (RuntimeException e) {
+            System.out.println("Email sending failed"+e.getMessage());
             throw new EmailSendingException("email sending failed!");
         }
         return new ResponseEntity<>(accountService.saveAccount(bankAccount), HttpStatus.OK);

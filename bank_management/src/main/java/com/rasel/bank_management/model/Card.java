@@ -1,6 +1,7 @@
 package com.rasel.bank_management.model;
 
 import com.rasel.bank_management.constants.CardStatus;
+import com.rasel.bank_management.constants.CardType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +21,13 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cardNumber;
-    private com.rasel.bank_management.constants.Card card;
+
+    @Enumerated(value = EnumType.STRING)
+    private CardType card;
+
     private LocalDate expiry_date;
+
+    @Enumerated(value = EnumType.STRING)
     private CardStatus status;
 
     @ManyToOne

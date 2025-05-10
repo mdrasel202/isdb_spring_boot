@@ -62,7 +62,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Loan> loan;
 
-    public User( String email, String password, Role role,String firstName,String lastName, String phone) {
+    public User(String email, String password, Role role, String firstName, String lastName, String phone) {
         this.email = email;
         this.password = password;
         this.role = role;
