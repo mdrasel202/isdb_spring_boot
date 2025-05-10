@@ -48,7 +48,8 @@ public class BankAccountController {
         user.setFirstName(bankAccountRequest.getFirstName());
         user.setLastName(bankAccountRequest.getLastName());
         user.setPhone(bankAccountRequest.getPhone());
-        user.setEmail("placeholder@example.com"); // Or request.getEmail() if you include it
+//        user.setEmail("placeholder@example.com");// Or request.getEmail() if you include it
+        user.setEmail(bankAccountRequest.getEmail());
         user.setPhone(bankAccountRequest.getPhone());
         user.setAddress(bankAccountRequest.getAddress());
         user.setPassword("default123"); // In real app, encode and set
