@@ -1,0 +1,11 @@
+package com.rasel.cafe_management.dao;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class LoginUserDto {
+    private String email;
+    private String password;
+}

@@ -1,6 +1,9 @@
 package com.rasel.bank_management.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rasel.bank_management.constants.AccountStatus;
 import com.rasel.bank_management.constants.AccountType;
 import jakarta.persistence.*;
@@ -28,6 +31,7 @@ public class BankAccount {
     private String accountNumber;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 

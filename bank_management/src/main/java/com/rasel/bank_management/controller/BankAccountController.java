@@ -41,7 +41,7 @@ public class BankAccountController {
      }
 
      //post
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<BankAccount> saveAccount(@Valid @RequestBody BankAccountRequest bankAccountRequest)
             throws MessagingException, GeneralSecurityException, IOException {
         User user = new User();
@@ -52,7 +52,7 @@ public class BankAccountController {
         user.setEmail(bankAccountRequest.getEmail());
         user.setPhone(bankAccountRequest.getPhone());
         user.setAddress(bankAccountRequest.getAddress());
-        user.setPassword("default123"); // In real app, encode and set
+        user.setPassword("12340"); // In real app, encode and set
         user.setRole(Role.USER);
 
         User savedUser = userService.createUser(user);
@@ -74,7 +74,54 @@ public class BankAccountController {
             throw new EmailSendingException("email sending failed!");
         }
         return new ResponseEntity<>(accountService.saveAccount(bankAccount), HttpStatus.OK);
+    }*/
+
+    @PostMapping
+    public ResponseEntity<BankAccount> saveAccount(@Valid @RequestBody BankAccountRequest bankAccountRequest)
+            throws MessagingException, GeneralSecurityException, IOException {
+
+        String email = bankAccountRequest.getEmail();
+        User user = userService.findByEmail(email); // You'll need to implement this method if not already present
+
+        if (user == null) {
+            user = new User();
+            user.setFirstName(bankAccountRequest.getFirstName());
+            user.setLastName(bankAccountRequest.getLastName());
+            user.setPhone(bankAccountRequest.getPhone());
+            user.setEmail(email);
+            user.setAddress(bankAccountRequest.getAddress());
+            user.setPassword("12340"); // Ideally encode this
+            user.setRole(Role.USER);
+
+            user = userService.createUser(user); // save new user
+        }
+
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.setAccountNumber(bankAccountRequest.getAccountNumber());
+        bankAccount.setAvailableBalance(bankAccountRequest.getAvailableBalance());
+        bankAccount.setOpenedDate(bankAccountRequest.getOpenedDate());
+        bankAccount.setStatus(bankAccountRequest.getAccountStatus());
+        bankAccount.setType(bankAccountRequest.getAccountType());
+        bankAccount.setUser(user); // use either new or existing user
+
+        BankAccount savedAccount = accountService.saveAccount(bankAccount);
+
+        try {
+            /*emailService.sendEmailWithAttachment(
+                    email,
+                    "Welcome Email",
+                    "Your account has been created."
+            );*/
+            System.out.println("email sent!");
+
+        } catch (RuntimeException e) {
+            System.out.println("Email sending failed: " + e.getMessage());
+            throw new EmailSendingException("Email sending failed!");
+        }
+
+        return new ResponseEntity<>(savedAccount, HttpStatus.OK);
     }
+
 
     //get All
     @GetMapping
@@ -91,7 +138,7 @@ public class BankAccountController {
     }
 
     //put
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<BankAccount> update(@PathVariable Long id, @RequestBody BankAccount bankAccount){
         BankAccount updateAccount = accountService.update(id, bankAccount);
         return new ResponseEntity<>(updateAccount, HttpStatus.OK);

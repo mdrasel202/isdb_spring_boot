@@ -120,4 +120,8 @@ public class UserService {
         Optional<User> byEmail = userRepository.findByEmail(username);
         return byEmail.map(CustomUserDetails::new).orElse(null);
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
 }

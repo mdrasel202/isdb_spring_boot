@@ -1,7 +1,9 @@
 package com.rasel.bank_management.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rasel.bank_management.constants.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -57,6 +59,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<BankAccount> bankAccounts;
 
     @OneToMany(mappedBy = "user")
