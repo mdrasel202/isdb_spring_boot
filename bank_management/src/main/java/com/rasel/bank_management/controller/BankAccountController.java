@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/bank")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class BankAccountController {
     private final AccountService accountService;
     private final EmailService emailService;
