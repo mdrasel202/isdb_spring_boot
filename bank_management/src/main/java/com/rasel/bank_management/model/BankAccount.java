@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,35 +24,38 @@ import java.util.List;
 @Entity
 @Table(name = "B_BANK_ACCOUNT")
 public class BankAccount {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "account_number", nullable = false)
+    @Column(name = "account_number", nullable = false, unique = true)
     private String accountNumber;
 
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name="user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL)
-//    @JoinColumn(name = "card", nullable = false)
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Card> card;
 
-    @Enumerated(value = EnumType.STRING)
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transactions> transactions;
+
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AccountType type;
 
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AccountStatus status;
 
-    @Column(nullable = false)
+    @Column(name = "available_balance", nullable = false)
     private BigDecimal availableBalance;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(nullable = false)
+    @Column(name = "opened_date", nullable = false)
     private LocalDate openedDate;
-
 }
+

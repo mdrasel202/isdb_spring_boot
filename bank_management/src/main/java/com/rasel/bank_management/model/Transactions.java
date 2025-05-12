@@ -11,7 +11,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,8 +18,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "B_TRANSACTION")
 public class Transactions {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "txn_id", unique = true, nullable = false)
@@ -31,8 +31,8 @@ public class Transactions {
     private BankAccount bankAccount;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TransactionType type;
+    @Column(name = "txn_type", nullable = false)
+    private TransactionType txnType;  // ✅ Clean, consistent name
 
     @Column
     private BigDecimal amount;
@@ -40,5 +40,6 @@ public class Transactions {
     @Column(name = "balance_after")
     private BigDecimal balanceAfter;
 
+    @Column
     private LocalDate date;
 }
