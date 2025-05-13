@@ -7,8 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.apachecommons.CommonsLog;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -20,17 +22,41 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 16, nullable = false, unique = true)
     private String cardNumber;
 
     @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
     private CardType card;
 
+    @Column(nullable = false)
     private LocalDate expiry_date;
 
     @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
     private CardStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "back account", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "back_account_id", nullable = false)
     private BankAccount bankAccount;
+
+    // Timestamp when the card was created
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    // Timestamp when the card was last updated
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    // Automatically set timestamps
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

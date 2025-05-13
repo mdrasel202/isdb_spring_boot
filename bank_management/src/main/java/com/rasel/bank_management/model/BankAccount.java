@@ -38,7 +38,7 @@ public class BankAccount {
     private User user;
 
     @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Card> card;
+    private List<Card> cards;
 
     @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transactions> transactions;

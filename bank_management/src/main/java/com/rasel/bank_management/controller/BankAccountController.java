@@ -84,12 +84,15 @@ public class BankAccountController {
         String email = bankAccountRequest.getEmail();
         User user = userService.findByEmail(email); // You'll need to implement this method if not already present
 
+//        User user = new User();
+
         if (user == null) {
             user = new User();
             user.setFirstName(bankAccountRequest.getFirstName());
             user.setLastName(bankAccountRequest.getLastName());
             user.setPhone(bankAccountRequest.getPhone());
             user.setEmail(email);
+//            user.setEmail(bankAccountRequest.getEmail());
             user.setAddress(bankAccountRequest.getAddress());
             user.setPassword("12340"); // Ideally encode this
             user.setRole(Role.USER);
