@@ -1,5 +1,7 @@
 package com.rasel.bank_management.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rasel.bank_management.constants.LoanStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,12 +23,18 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String accountNumber;
+//    @Column(name = "account_number",nullable = false)
+//    private String accountNumber;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "account_number", nullable = false)
+    private BankAccount bankAccount;
 
     private BigDecimal amount;
 
@@ -38,8 +46,18 @@ public class Loan {
 
     private LocalDate applicationDate;
 
+    private LocalDate acceptDate;
+
     private LocalDate dueDate;
 
     @Enumerated(value = EnumType.STRING)
     private LoanStatus status;
+
+
+    @PrePersist
+    public void prePersist() {
+        if (applicationDate == null) {
+            applicationDate = LocalDate.now();
+        }
+    }
 }

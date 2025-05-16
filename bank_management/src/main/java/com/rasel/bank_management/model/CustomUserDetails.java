@@ -38,6 +38,8 @@ public record CustomUserDetails(User user) implements UserDetails {
         return user.getRole();
     }
 
+    public String getBackAccount(){ return null;}
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

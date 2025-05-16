@@ -1,5 +1,5 @@
 package com.rasel.bank_management.constants;
 
 public enum AccountStatus {
-    ACTIVE,INACTIVE,SUSPEND
+    ACTIVE,INACTIVE,SUSPEND,REQUESTED
 }

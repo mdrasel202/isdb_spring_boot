@@ -60,10 +60,11 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @JsonBackReference
-    private List<BankAccount> bankAccounts;
+    private List<BankAccount> bankAccount;
 
     @OneToMany(mappedBy = "user")
-    private List<Loan> loan;
+    @JsonManagedReference
+    private List<Loan> loans;
 
     public User(String email, String password, Role role, String firstName, String lastName, String phone) {
         this.email = email;

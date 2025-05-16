@@ -1,5 +1,5 @@
 package com.rasel.bank_management.constants;
 
 public enum LoanStatus {
-    PENDING, APPROVED
+    PENDING, APPROVED,REJECTED,PAID
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class CardService {
@@ -24,7 +25,7 @@ public class CardService {
     }
 
     public CardResponseDTO createCard(CardRequestDTO requestDTO){
-        BankAccount account = accountRepository.findById(requestDTO.getBackAccountId()).orElseThrow(() -> new RuntimeException("Bank account not found"));
+        BankAccount account = accountRepository.findById(requestDTO.getBankAccountId()).orElseThrow(() -> new RuntimeException("Bank account not found"));
 
         if(account.getAvailableBalance().compareTo(new BigDecimal("5.00")) < 0){
             throw  new RuntimeException("Insufficient balance to create carde");
@@ -36,30 +37,45 @@ public class CardService {
         Card card = new Card();
         card.setCardNumber(generateUniqueCardNumber());
         card.setCard(requestDTO.getCardType());
-        card.setStatus(CardStatus.ACTIVE);
+        card.setStatus(CardStatus.REQUESTED);
         card.setExpiry_date(LocalDate.now().plusYears(4));
         card.setBankAccount(account);
 
-        Card savedCard = cardRepository.save(card);
+        Card save = cardRepository.save(card);
+//        cardRepo.save(card);
+//        Card savedCard = cardRepository.save(card);
 
-        return mapToDto(savedCard);
-    }
-
-    public CardResponseDTO mapToDto(Card card){
-        BankAccount acc = card.getBankAccount();
+//        return mapToDto(savedCard);
 
         CardResponseDTO dto = new CardResponseDTO();
         dto.setCardNumber(card.getCardNumber());
         dto.setCardType(card.getCard());
         dto.setCardStatus(card.getStatus());
         dto.setExpiry_date(card.getExpiry_date());
-        dto.setAccountId(acc.getId());
-        dto.setAvailableBalance(acc.getAvailableBalance());
+        dto.setAccountId(account.getId());
+        dto.setAvailableBalance(account.getAvailableBalance());
 
         return dto;
     }
 
     private String generateUniqueCardNumber(){
         return String.valueOf((long)(Math.random() * 1_0000_0000_0000_0000L));
+    }
+
+    public void saveCard(CardRequestDTO cardRequestDTO) {
+        BankAccount account = accountRepository.findById(cardRequestDTO.getBankAccountId()).orElseThrow(() -> new RuntimeException("Account not found"));
+
+        Card card = new Card();
+        card.setCardNumber(generateUniqueCardNumber());
+        card.setCard(cardRequestDTO.getCardType());
+        card.setStatus(CardStatus.REQUESTED);
+        card.setExpiry_date(LocalDate.now().plusYears(4));
+        card.setBankAccount(account);
+
+        cardRepository.save(card);
+    }
+
+    public List<Card> getAllCard() {
+        return cardRepository.findAll();
     }
 }

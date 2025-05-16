@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CardRequestDTO {
-    private Long backAccountId;
+    private Long bankAccountId;
     private CardType cardType;
 }

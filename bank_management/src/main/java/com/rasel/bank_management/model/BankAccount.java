@@ -43,6 +43,10 @@ public class BankAccount {
     @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transactions> transactions;
 
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Loan> loans;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AccountType type;
