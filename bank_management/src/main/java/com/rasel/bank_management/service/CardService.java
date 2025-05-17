@@ -7,6 +7,7 @@ import com.rasel.bank_management.model.BankAccount;
 import com.rasel.bank_management.model.Card;
 import com.rasel.bank_management.repository.AccountRepository;
 import com.rasel.bank_management.repository.CardRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -75,7 +76,13 @@ public class CardService {
         cardRepository.save(card);
     }
 
+    @Transactional
     public List<Card> getAllCard() {
-        return cardRepository.findAll();
+        List<Card> all = cardRepository.findAll();
+
+        for (Card card:all){
+            card.getBankAccount();
+        }
+        return all;
     }
 }

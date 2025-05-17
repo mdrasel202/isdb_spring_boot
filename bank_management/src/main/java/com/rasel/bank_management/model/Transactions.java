@@ -1,7 +1,5 @@
 package com.rasel.bank_management.model;
 
-
-import com.fasterxml.jackson.databind.node.LongNode;
 import com.rasel.bank_management.constants.TransactionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,6 +9,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,25 +20,26 @@ public class Transactions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID") // Explicitly define name for clarity
     private Long id;
 
-    @Column(name = "txn_id", unique = true, nullable = false)
+    @Column(name = "TXN_ID", unique = true, nullable = false)
     private String txnId;
 
     @ManyToOne
-    @JoinColumn(name = "account_id", nullable = false)
+    @JoinColumn(name = "ACCOUNT_ID", nullable = false)
     private BankAccount bankAccount;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "txn_type", nullable = false)
-    private TransactionType txnType;  // ✅ Clean, consistent name
+    @Column(name = "TXN_TYPE", nullable = false)
+    private TransactionType txnType;
 
-    @Column
+    @Column(name = "AMOUNT")
     private BigDecimal amount;
 
-    @Column(name = "balance_after")
+    @Column(name = "BALANCE_AFTER")
     private BigDecimal balanceAfter;
 
-    @Column
+    @Column(name = "TXN_DATE")
     private LocalDate date;
 }

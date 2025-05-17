@@ -1,5 +1,6 @@
 package com.rasel.bank_management.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.rasel.bank_management.constants.CardStatus;
 import com.rasel.bank_management.constants.CardType;
 import jakarta.persistence.*;
@@ -39,6 +40,7 @@ public class Card {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "back_account_id", nullable = false)
+    @JsonBackReference
     private BankAccount bankAccount;
 
     // Timestamp when the card was created

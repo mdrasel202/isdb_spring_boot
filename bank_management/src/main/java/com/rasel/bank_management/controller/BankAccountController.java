@@ -43,8 +43,10 @@ public class BankAccountController {
     }
 
     // ADMIN APPROVES ACCOUNT
-    @PostMapping("/approve")
+    @PostMapping("/approve/{id}")
     public ResponseEntity<BankAccountResponseDTO> approveAccount(@PathVariable Long id) {
         return ResponseEntity.ok(accountService.approveAccount(id));
     }
+
+
 }
