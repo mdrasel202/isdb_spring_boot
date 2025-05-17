@@ -40,8 +40,12 @@ public class BankAccount {
     @JsonManagedReference
     private List<Card> cards;
 
+//    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Transactions> transactions;
+
     @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Transactions> transactions;
+    @JsonManagedReference
+    private List<Transaction> transaction;
 
     @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -59,7 +63,16 @@ public class BankAccount {
     private BigDecimal availableBalance;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "opened_date", nullable = false)
+    @Column(name = "opened_date", nullable = true)
     private LocalDate openedDate;
+
+    @Column(nullable = false)
+    private LocalDate requestDate;
+
+    @Column(nullable = false)
+    private BigDecimal balance;
+
+    @Column(nullable = false)
+    private String name;
 }
 
