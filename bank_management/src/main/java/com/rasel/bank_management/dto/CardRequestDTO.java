@@ -10,4 +10,5 @@ import lombok.Setter;
 public class CardRequestDTO {
     private Long bankAccountId;
     private CardType cardType;
+    private CardStatus status;
 }

@@ -1,5 +1,6 @@
 package com.rasel.bank_management.controller;
 
+import com.rasel.bank_management.dto.CardGetAllDTO;
 import com.rasel.bank_management.dto.CardRequestDTO;
 import com.rasel.bank_management.dto.CardResponseDTO;
 import com.rasel.bank_management.model.Card;
@@ -36,7 +37,7 @@ public class CardController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Card>> getAll(){
+    public ResponseEntity<List<CardGetAllDTO>> getAll(){
         return ResponseEntity.ok(cardService.getAllCard());
     }
 
@@ -58,4 +59,8 @@ public class CardController {
         return ResponseEntity.ok(cardService.updateCard(cardRequestDTO));
     }
 
+    @GetMapping("/pending")
+    public ResponseEntity<List<CardResponseDTO>> getPendingCards() {
+        return ResponseEntity.ok(cardService.getPendingCards());
+    }
 }
