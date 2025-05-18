@@ -28,5 +28,6 @@ public class Transaction {
     private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "transaction_date")
     private LocalDate date;
 }

@@ -43,7 +43,7 @@ public class BankAccount {
 //    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Transactions> transactions;
 
-    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true,  fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Transaction> transaction;
 

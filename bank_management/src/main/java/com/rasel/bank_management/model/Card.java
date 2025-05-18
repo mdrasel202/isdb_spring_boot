@@ -24,7 +24,8 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 16, nullable = false, unique = true)
+    @Column(length = 255, nullable = false, unique = true)
+
     private String cardNumber;
 
     @Enumerated(value = EnumType.STRING)

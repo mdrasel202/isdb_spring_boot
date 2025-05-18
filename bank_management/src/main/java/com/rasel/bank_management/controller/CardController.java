@@ -39,4 +39,23 @@ public class CardController {
     public ResponseEntity<List<Card>> getAll(){
         return ResponseEntity.ok(cardService.getAllCard());
     }
+
+    @PostMapping("/approve")
+    public ResponseEntity<CardResponseDTO> approveCard(@RequestBody CardRequestDTO request) {
+        return ResponseEntity.ok(cardService.approveCard(request)); // generates card number, status = "APPROVED"
+    }
+
+    @PostMapping("/reject")
+    public ResponseEntity<Object> rejectCard(@RequestBody CardRequestDTO request) {
+        cardService.rejectCard(request); // status = "REJECTED"
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Card request rejected.");
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<CardResponseDTO> updateCard(@RequestBody CardRequestDTO cardRequestDTO) {
+        return ResponseEntity.ok(cardService.updateCard(cardRequestDTO));
+    }
+
 }

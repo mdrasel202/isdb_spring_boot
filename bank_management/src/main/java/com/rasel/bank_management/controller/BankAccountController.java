@@ -24,8 +24,6 @@ import java.util.Map;
 @RequestMapping(value = "/bank")
 public class BankAccountController {
     private final AccountService accountService;
-//    private final EmailService emailService;
-//    private final UserService userService;
 
     public BankAccountController(AccountService accountService){
         this.accountService = accountService;

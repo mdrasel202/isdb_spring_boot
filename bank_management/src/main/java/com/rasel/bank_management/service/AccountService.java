@@ -46,7 +46,7 @@ public class AccountService {
         } else {
             account.setBalance(BigDecimal.ZERO);
         }
-        account.setAvailableBalance(BigDecimal.ZERO);
+        account.setAvailableBalance(dto.getBalance());
         account.setOpenedDate(LocalDate.now());
         account.setName(dto.getName());
         account.setRequestDate(LocalDate.now());

@@ -2,6 +2,7 @@ package com.rasel.bank_management.dto;
 
 import com.rasel.bank_management.constants.CardStatus;
 import com.rasel.bank_management.constants.CardType;
+import com.rasel.bank_management.model.Card;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +19,7 @@ public class CardResponseDTO {
 
     private Long accountId;
     private BigDecimal availableBalance;
+
+
 
 }
