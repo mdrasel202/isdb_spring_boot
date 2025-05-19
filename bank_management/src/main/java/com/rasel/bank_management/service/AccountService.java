@@ -25,6 +25,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
     private final TransactionRepository transactionRepository;
+
     public AccountService(AccountRepository accountRepository, UserRepository userRepository, TransactionRepository transactionRepository){
         this.accountRepository = accountRepository;
         this.userRepository = userRepository;
@@ -134,6 +135,32 @@ public class AccountService {
 
     public List<Transaction> getTransactionsForAccount(Long accountId) {
         return transactionRepository.findByBankAccountId(accountId);
+    }
+
+//    public List<BankAccountResponseDTO> findAllAccount() {
+//        return accountRepository.findAll();
+//    }
+
+
+    //get all
+    public List<BankAccountResponseDTO> findAllAccount() {
+        List<BankAccount> accounts = accountRepository.findAll();
+        return accounts.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private BankAccountResponseDTO mapToDTO(BankAccount account) {
+        BankAccountResponseDTO dto = new BankAccountResponseDTO();
+        dto.setId(account.getId());
+        dto.setAccountNumber(account.getAccountNumber());
+        dto.setUserId(account.getUser().getId());
+        dto.setUserName(account.getUser().getFirstName() + " " + account.getUser().getLastName());
+        dto.setType(account.getType());
+        dto.setStatus(account.getStatus());
+        dto.setAvailableBalance(account.getAvailableBalance());
+        dto.setOpenedDate(account.getOpenedDate());
+        return dto;
     }
 
 }

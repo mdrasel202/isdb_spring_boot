@@ -42,6 +42,11 @@ public class BankAccountController {
         return ResponseEntity.ok(accountService.getAllRequestedAccounts());
     }
 
+    @GetMapping("/getAll")
+    public ResponseEntity<List<BankAccountResponseDTO>> getAll(){
+        return ResponseEntity.ok(accountService.findAllAccount());
+    }
+
     // ADMIN APPROVES ACCOUNT
     @PostMapping("/approve/{id}")
     public ResponseEntity<BankAccountResponseDTO> approveAccount(@PathVariable Long id) {
