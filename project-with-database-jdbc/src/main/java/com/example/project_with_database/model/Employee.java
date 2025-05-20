@@ -16,14 +16,14 @@ public class Employee {
 	private String designation;
 	private int age;
 	private String address;
-	private String dob;
+	private LocalDate dob;
 	private double salary;
 
 
 	public Employee() {
 	}
 
-	public Employee(String name, String email, String designation, int age, String address, String dob, double salary, int id) {
+	public Employee(int id, String name, String email, String designation, int age, String address, LocalDate dob, double salary) {
 		this.name = name;
 		this.email = email;
 		this.designation = designation;
@@ -82,11 +82,11 @@ public class Employee {
 		this.address = address;
 	}
 
-	public String getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 
