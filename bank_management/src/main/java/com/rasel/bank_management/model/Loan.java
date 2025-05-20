@@ -23,9 +23,6 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(name = "account_number",nullable = false)
-//    private String accountNumber;
-
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "user_id", nullable = false)
@@ -38,6 +35,7 @@ public class Loan {
 
     private BigDecimal amount;
 
+    @Column(nullable = false)
     private BigDecimal approvedAmount;
 
     private BigDecimal interestRate;
@@ -52,6 +50,10 @@ public class Loan {
 
     @Enumerated(value = EnumType.STRING)
     private LoanStatus status;
+
+    private BigDecimal monthlyInterest;
+
+    private BigDecimal yearlyInterest;
 
 
     @PrePersist

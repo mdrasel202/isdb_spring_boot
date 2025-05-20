@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -33,50 +34,71 @@ public class LoanController {
     }
 
     /**
-     * Admin creates a loan manually.
-     * POST /api/loans/admin/create
-     */
-    @PostMapping("/request/create")
-    public ResponseEntity<?>  adminCrateLoan(@Valid @RequestBody LoanRequestDTO requestDTO){
-//        LoanResponseDTO responseDTO = loanService.admonCrateLoan(requestDTO);
-        return ResponseEntity.ok(loanService.adminCrateLoan(requestDTO));
-    }
-
-    /**
-     * Get all loans in the system (admin view).
-     * GET /api/loans/admin/all
-     */
-    @GetMapping("/all")
-    public ResponseEntity<List<Loan>> getAllLoans(){
-        List<Loan> loans = loanService.getAllLoans();
-        return new ResponseEntity<>(loans, HttpStatus.OK);
-    }
-
-    /**
-     * Get loan summary (totals, counts, etc).
-     * GET /api/loans/admin/summary
-     */
-    @GetMapping("/admin/summary")
-    public ResponseEntity<Map<String, Object>> getLoanSummary() {
-        return ResponseEntity.ok(loanService.getLoanSummary());
-    }
-
-    /**
      * Get all loans for a specific user.
      * GET /api/loans/user/{userId}
      */
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Loan>> getLoanId(@PathVariable Integer userId){
-        return ResponseEntity.ok(loanService.getLoanId(userId));
+    public ResponseEntity<List<LoanResponseDTO>> getLoanId(@PathVariable Integer userId){
+        return ResponseEntity.ok(loanService.getUserId(userId));
     }
 
-    /**
-     * Get loan details by loan ID.
-     * GET /api/loans/{loanId}
-     */
-    @GetMapping("/{loanId}")
-    public ResponseEntity<?> getLoansId(@PathVariable Long loanId){
-        return ResponseEntity.ok(loanService.getLoansId(loanId));
+    //pending
+    @GetMapping("/pending")
+    public ResponseEntity<List<LoanResponseDTO>> getPaddingLoans(){
+        return ResponseEntity.ok(loanService.getPendingLoans());
     }
+
+    //approved
+    @PostMapping("/approved/{id}")
+    public ResponseEntity<LoanResponseDTO> postApproved(@PathVariable Long id, @RequestParam BigDecimal amount){
+        LoanResponseDTO postAppr = loanService.postApprovedLoan(id,amount);
+        return new ResponseEntity<>(postAppr, HttpStatus.OK);
+    }
+
+    //cancle
+    @PostMapping("/cancel/{id}")
+    public ResponseEntity<LoanResponseDTO> postCancel(@PathVariable Long id){
+        return ResponseEntity.ok(loanService.CancelLoan(id));
+    }
+
+//    /**
+//     * Admin creates a loan manually.
+//     * POST /api/loans/admin/create
+//     */
+//    @PostMapping("/request/create")
+//    public ResponseEntity<?>  adminCrateLoan(@Valid @RequestBody LoanRequestDTO requestDTO){
+////        LoanResponseDTO responseDTO = loanService.admonCrateLoan(requestDTO);
+//        return ResponseEntity.ok(loanService.adminCrateLoan(requestDTO));
+//    }
+//
+//    /**
+//     * Get all loans in the system (admin view).
+//     * GET /api/loans/admin/all
+//     */
+//    @GetMapping("/all")
+//    public ResponseEntity<List<Loan>> getAllLoans(){
+//        List<Loan> loans = loanService.getAllLoans();
+//        return new ResponseEntity<>(loans, HttpStatus.OK);
+//    }
+//
+//    /**
+//     * Get loan summary (totals, counts, etc).
+//     * GET /api/loans/admin/summary
+//     */
+//    @GetMapping("/admin/summary")
+//    public ResponseEntity<Map<String, Object>> getLoanSummary() {
+//        return ResponseEntity.ok(loanService.getLoanSummary());
+//    }
+//
+//
+//
+//    /**
+//     * Get loan details by loan ID.
+//     * GET /api/loans/{loanId}
+//     */
+//    @GetMapping("/{loanId}")
+//    public ResponseEntity<?> getLoansId(@PathVariable Long loanId){
+//        return ResponseEntity.ok(loanService.getLoansId(loanId));
+//    }
 
 }

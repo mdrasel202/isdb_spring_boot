@@ -12,8 +12,8 @@ import java.time.LocalDate;
 @Setter
 public class LoanResponseDTO {
     private Long loanId;
-    private Integer userId;
-    private String accountNumber;
+//    private Integer userId;
+//    private String accountNumber;
     private BigDecimal amount;
     private BigDecimal approvedAmount;
     private BigDecimal interestRate;
@@ -23,17 +23,20 @@ public class LoanResponseDTO {
     private LoanStatus status;
     private LocalDate applicationDate;
 
+    private BigDecimal monthlyInterest;
+    private BigDecimal yearLyInterest;
 
 
-    public LoanResponseDTO(Loan saveLoan) {
-        this.loanId = saveLoan.getId();
-        this.userId = saveLoan.getUser().getId();
-        this.accountNumber = saveLoan.getBankAccount().getAccountNumber();
-        this.amount = saveLoan.getAmount();
-        this.approvedAmount = saveLoan.getApprovedAmount();
-        this.interestRate = saveLoan.getInterestRate();
-        this.dueDate = saveLoan.getDueDate();
-        this.status = saveLoan.getStatus();
-        this.applicationDate = saveLoan.getApplicationDate();
-    }
+
+//    public LoanResponseDTO(Loan saveLoan) {
+//        this.loanId = saveLoan.getId();
+//        this.userId = saveLoan.getUser().getId();
+//        this.accountNumber = saveLoan.getBankAccount().getAccountNumber();
+//        this.amount = saveLoan.getAmount();
+//        this.approvedAmount = saveLoan.getApprovedAmount();
+//        this.interestRate = saveLoan.getInterestRate();
+//        this.dueDate = saveLoan.getDueDate();
+//        this.status = saveLoan.getStatus();
+//        this.applicationDate = saveLoan.getApplicationDate();
+//    }
 }

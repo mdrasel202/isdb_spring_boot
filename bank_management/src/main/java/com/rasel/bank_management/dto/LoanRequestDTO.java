@@ -14,4 +14,5 @@ public class LoanRequestDTO {
     private BigDecimal amount;
     private BigDecimal interestRate;
     private LocalDate dueDate;
+    private LocalDate applicationDate;
 }
