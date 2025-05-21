@@ -1,5 +1,6 @@
 package com.rasel.bank_management.controller;
 
+import com.rasel.bank_management.dto.LoanApprovedDTO;
 import com.rasel.bank_management.dto.LoanRequestDTO;
 import com.rasel.bank_management.dto.LoanResponseDTO;
 import com.rasel.bank_management.model.Loan;
@@ -50,8 +51,8 @@ public class LoanController {
 
     //approved
     @PostMapping("/approved/{id}")
-    public ResponseEntity<LoanResponseDTO> postApproved(@PathVariable Long id, @RequestParam BigDecimal amount){
-        LoanResponseDTO postAppr = loanService.postApprovedLoan(id,amount);
+    public ResponseEntity<LoanResponseDTO> postApproved(@PathVariable Long id, @RequestBody LoanApprovedDTO loanApprovedDTO){
+        LoanResponseDTO postAppr = loanService.postApprovedLoan(id,loanApprovedDTO.getAmount());
         return new ResponseEntity<>(postAppr, HttpStatus.OK);
     }
 

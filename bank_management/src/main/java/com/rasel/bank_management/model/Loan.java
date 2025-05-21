@@ -51,9 +51,9 @@ public class Loan {
     @Enumerated(value = EnumType.STRING)
     private LoanStatus status;
 
-    private BigDecimal monthlyInterest;
-
-    private BigDecimal yearlyInterest;
+//    private BigDecimal monthlyInterest;
+//
+//    private BigDecimal yearlyInterest;
 
 
     @PrePersist

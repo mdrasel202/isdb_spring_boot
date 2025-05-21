@@ -71,7 +71,7 @@ public class LoanService {
 
     //pending
     public List<LoanResponseDTO> getPendingLoans() {
-        return loanRepository.findByStatus("PENDING")
+        return loanRepository.findByStatus(LoanStatus.PENDING)
                 .stream()
                 .map(this::saveLoan)
                 .collect(Collectors.toList());
@@ -92,6 +92,7 @@ public class LoanService {
     public LoanResponseDTO CancelLoan(Long loanId) {
         Loan loan = loanRepository.findById(loanId).orElseThrow();
         loan.setStatus(LoanStatus.CANCELLED);
+
         return saveLoan(loanRepository.save(loan));
     }
 
