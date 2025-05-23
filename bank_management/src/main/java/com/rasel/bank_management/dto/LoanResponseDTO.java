@@ -12,8 +12,7 @@ import java.time.LocalDate;
 @Setter
 public class LoanResponseDTO {
     private Long loanId;
-//    private Integer userId;
-//    private String accountNumber;
+    private String accountNumber;
     private BigDecimal amount;
     private BigDecimal approvedAmount;
     private BigDecimal interestRate;
@@ -24,7 +23,7 @@ public class LoanResponseDTO {
     private LocalDate applicationDate;
 
     private BigDecimal monthlyInterest;
-    private BigDecimal yearLyInterest;
+    private BigDecimal yearlyInterest;
 
 
 

@@ -99,6 +99,7 @@ public class LoanService {
     private LoanResponseDTO saveLoan(Loan loan){
         LoanResponseDTO dto = new LoanResponseDTO();
         dto.setLoanId(loan.getId());
+        dto.setAccountNumber(loan.getBankAccount().getAccountNumber());
         dto.setAmount(loan.getAmount());
         dto.setApprovedAmount(loan.getApprovedAmount());
         dto.setInterestRate(loan.getInterestRate());
@@ -118,7 +119,14 @@ public class LoanService {
         BigDecimal monthlyInterest = yearlyInterest
                 .divide(BigDecimal.valueOf(12), RoundingMode.HALF_UP);
 
-        dto.setYearLyInterest(yearlyInterest);
+//        BigDecimal interestRate = loan.getInterestRate();
+//        BigDecimal availableAmount = approvedAmount.subtract(BigDecimal.valueOf(approvedAmount.doubleValue() * (interestRate.doubleValue() / 100.0)));
+//        loan.setAvailableAmount(availableAmount);
+//
+//        BigDecimal monthlyInterest = approvedAmount.multiply(interestRate).divide(BigDecimal.valueOf(12 * 100), 2, RoundingMode.HALF_UP);
+//        BigDecimal yearlyInterest = approvedAmount.multiply(interestRate).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+
+        dto.setYearlyInterest(yearlyInterest);
         dto.setMonthlyInterest(monthlyInterest);
 
 

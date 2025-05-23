@@ -51,8 +51,10 @@ public class Loan {
     @Enumerated(value = EnumType.STRING)
     private LoanStatus status;
 
+    @Column(nullable = false)
     private BigDecimal monthlyInterest;
 
+    @Column(nullable = false)
     private BigDecimal yearlyInterest;
 
 
