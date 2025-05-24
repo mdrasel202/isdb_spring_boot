@@ -2,14 +2,17 @@ package com.example.project_with_database.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 
-
-public class Employee {
+public class Employee{
 	private int id;
 	private String name;
 	private String email;
