@@ -25,17 +25,4 @@ public class LoanResponseDTO {
     private BigDecimal monthlyInterest;
     private BigDecimal yearlyInterest;
 
-
-
-//    public LoanResponseDTO(Loan saveLoan) {
-//        this.loanId = saveLoan.getId();
-//        this.userId = saveLoan.getUser().getId();
-//        this.accountNumber = saveLoan.getBankAccount().getAccountNumber();
-//        this.amount = saveLoan.getAmount();
-//        this.approvedAmount = saveLoan.getApprovedAmount();
-//        this.interestRate = saveLoan.getInterestRate();
-//        this.dueDate = saveLoan.getDueDate();
-//        this.status = saveLoan.getStatus();
-//        this.applicationDate = saveLoan.getApplicationDate();
-//    }
 }

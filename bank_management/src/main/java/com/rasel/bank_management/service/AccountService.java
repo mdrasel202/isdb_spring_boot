@@ -68,7 +68,7 @@ public class AccountService {
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
         account.setStatus(AccountStatus.ACTIVE);
-        account.setAvailableBalance(BigDecimal.valueOf(100));
+        account.setAvailableBalance(account.getAvailableBalance());
         account.setOpenedDate(LocalDate.now());
         accountRepository.save(account);
 

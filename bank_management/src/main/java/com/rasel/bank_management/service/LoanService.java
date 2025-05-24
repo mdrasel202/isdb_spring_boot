@@ -53,6 +53,13 @@ public class LoanService {
         loan.setDueDate(requestDTO.getDueDate());
         loan.setStatus(LoanStatus.PENDING);
 
+        // Calculate monthly and yearly interest based on approved amount (0.00 at request time)
+        BigDecimal yearlyInterest = BigDecimal.ZERO;
+        BigDecimal monthlyInterest = BigDecimal.ZERO;
+
+        loan.setYearlyInterest(yearlyInterest);
+        loan.setMonthlyInterest(monthlyInterest);
+
         return  saveLoan(loanRepository.save(loan));
 
 //        return new LoanResponseDTO(saveLoan);
@@ -85,6 +92,14 @@ public class LoanService {
         loan.setAvailableAmount(approvedAmount);
         loan.setAcceptDate(LocalDate.now());
 
+
+        BigDecimal interestRate = loan.getInterestRate() != null ? loan.getInterestRate() : BigDecimal.ZERO;
+        BigDecimal yearlyInterest = approvedAmount.multiply(interestRate).divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP);
+        BigDecimal monthlyInterest = yearlyInterest.divide(BigDecimal.valueOf(12), RoundingMode.HALF_UP);
+
+        loan.setYearlyInterest(yearlyInterest);
+        loan.setMonthlyInterest(monthlyInterest);
+
         return saveLoan(loanRepository.save(loan));
     }
 
@@ -107,27 +122,23 @@ public class LoanService {
         dto.setDueDate(loan.getDueDate());
         dto.setAcceptDate(loan.getAcceptDate());
         dto.setStatus(loan.getStatus());
+        dto.setApplicationDate(loan.getApplicationDate());
+        dto.setMonthlyInterest(loan.getMonthlyInterest());
+        dto.setYearlyInterest(loan.getYearlyInterest());
 
         // Safe calculation
-        BigDecimal approvedAmount = loan.getApprovedAmount() != null ? loan.getApprovedAmount() : BigDecimal.ZERO;
-        BigDecimal interestRate = loan.getInterestRate() != null ? loan.getInterestRate() : BigDecimal.ZERO;
-
-        BigDecimal yearlyInterest = approvedAmount
-                .multiply(interestRate)
-                .divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP);
-
-        BigDecimal monthlyInterest = yearlyInterest
-                .divide(BigDecimal.valueOf(12), RoundingMode.HALF_UP);
-
-//        BigDecimal interestRate = loan.getInterestRate();
-//        BigDecimal availableAmount = approvedAmount.subtract(BigDecimal.valueOf(approvedAmount.doubleValue() * (interestRate.doubleValue() / 100.0)));
-//        loan.setAvailableAmount(availableAmount);
+//        BigDecimal approvedAmount = loan.getApprovedAmount() != null ? loan.getApprovedAmount() : BigDecimal.ZERO;
+//        BigDecimal interestRate = loan.getInterestRate() != null ? loan.getInterestRate() : BigDecimal.ZERO;
 //
-//        BigDecimal monthlyInterest = approvedAmount.multiply(interestRate).divide(BigDecimal.valueOf(12 * 100), 2, RoundingMode.HALF_UP);
-//        BigDecimal yearlyInterest = approvedAmount.multiply(interestRate).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
-
-        dto.setYearlyInterest(yearlyInterest);
-        dto.setMonthlyInterest(monthlyInterest);
+//        BigDecimal yearlyInterest = approvedAmount
+//                .multiply(interestRate)
+//                .divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP);
+//
+//        BigDecimal monthlyInterest = yearlyInterest
+//                .divide(BigDecimal.valueOf(12), RoundingMode.HALF_UP);
+//
+//        dto.setYearlyInterest(yearlyInterest);
+//        dto.setMonthlyInterest(monthlyInterest);
 
 
         return dto;
