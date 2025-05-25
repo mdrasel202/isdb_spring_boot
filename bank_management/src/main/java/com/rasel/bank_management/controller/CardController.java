@@ -42,7 +42,7 @@ public class CardController {
         return ResponseEntity.ok(cardService.getAllCard());
     }
 
-    @PostMapping("/approve/{id}")
+    @PostMapping("/approve")
     public ResponseEntity<CardResponseDTO> approveCard(@RequestBody CardRequestDTO request) {
         return ResponseEntity.ok(cardService.approveCard(request)); // generates card number, status = "APPROVED"
     }
