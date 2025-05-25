@@ -13,7 +13,10 @@ public interface CardRepository extends JpaRepository<Card, Long> {
     List<Card> findByBankAccount(BankAccount bankAccount);
 
     List<Card> findByStatusIn(List<CardStatus> status);
+//    List<Card> findByStatus(CardStatus status);
 
     // If 'bankAccountId' is a Long field in the Card entity:
     Optional<Card> findByBankAccountId(Long bankAccountId);
+
+    List<Card> findAllByBankAccountId(Long bankAccountId);
 }

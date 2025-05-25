@@ -25,7 +25,6 @@ public class Card {
     private Long id;
 
     @Column(length = 255, nullable = false, unique = true)
-
     private String cardNumber;
 
     @Enumerated(value = EnumType.STRING)
@@ -40,7 +39,7 @@ public class Card {
     private CardStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "back_account_id", nullable = false)
+    @JoinColumn(name = "bank_account_id", nullable = false)
     @JsonBackReference
     private BankAccount bankAccount;
 

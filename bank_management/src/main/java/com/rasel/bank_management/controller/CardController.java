@@ -22,6 +22,7 @@ public class CardController {
         this.cardService = cardService;
     }
 
+
     @PostMapping("/request")
     public ResponseEntity<Object> userRequest(@RequestBody CardRequestDTO cardRequestDTO){
         cardService.saveCard(cardRequestDTO);
@@ -41,7 +42,7 @@ public class CardController {
         return ResponseEntity.ok(cardService.getAllCard());
     }
 
-    @PostMapping("/approve")
+    @PostMapping("/approve/{id}")
     public ResponseEntity<CardResponseDTO> approveCard(@RequestBody CardRequestDTO request) {
         return ResponseEntity.ok(cardService.approveCard(request)); // generates card number, status = "APPROVED"
     }

@@ -11,4 +11,5 @@ public class CardRequestDTO {
     private Long bankAccountId;
     private CardType cardType;
     private CardStatus status;
+    private Long cardId;
 }
