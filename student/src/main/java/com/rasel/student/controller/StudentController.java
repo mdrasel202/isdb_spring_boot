@@ -27,4 +27,18 @@ public class StudentController {
         List<Student> get = service.getAll();
         return new ResponseEntity<>(get, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteStu(@PathVariable Long id){
+        service.deleteStudent(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student studentDetails) {
+        Student updated = service.updateStudent(id, studentDetails);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
+
+
 }
