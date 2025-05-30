@@ -22,6 +22,6 @@ public class Student {
     private String clazz;
     private Integer age;
     private String address;
-    private LocalDate dateOfBirthday;
+    private String dateOfBirthday;
 
 }
