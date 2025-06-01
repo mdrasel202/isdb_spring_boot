@@ -19,4 +19,7 @@ public interface CardRepository extends JpaRepository<Card, Long> {
     Optional<Card> findByBankAccountId(Long bankAccountId);
 
     List<Card> findAllByBankAccountId(Long bankAccountId);
+
+//    Optional<BankAccount> findByAccountNumbers(String accountNumber);
+
 }

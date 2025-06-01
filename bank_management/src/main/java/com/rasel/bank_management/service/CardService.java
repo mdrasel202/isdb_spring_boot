@@ -36,7 +36,7 @@ public class CardService {
 
 
     public CardResponseDTO createCard(CardRequestDTO requestDTO) {
-        BankAccount account = accountRepository.findById(requestDTO.getBankAccountId()).orElseThrow(() -> new RuntimeException("Bank account not found"));
+        BankAccount account = accountRepository.findByAccountNumber(requestDTO.getAccountNumber()).orElseThrow(() -> new RuntimeException("Bank account not found"));
 
         if (account.getAvailableBalance().compareTo(new BigDecimal("500")) < 0) {
             throw new RuntimeException("Insufficient balance to create carde");
@@ -46,12 +46,11 @@ public class CardService {
         accountRepository.save(account);
 
         Card card = new Card();
-        card.setId(card.getId());
+        card.setBankAccount(account);
         card.setCardNumber(generateUniqueCardNumber());
         card.setCard(requestDTO.getCardType());
         card.setStatus(CardStatus.REQUESTED);
         card.setExpiry_date(LocalDate.now().plusYears(4));
-        card.setBankAccount(account);
 
         Card save = cardRepository.save(card);
 ////        cardRepo.save(card);
@@ -76,7 +75,7 @@ public class CardService {
     }
 
     public void saveCard(CardRequestDTO cardRequestDTO) {
-        BankAccount account = accountRepository.findById(cardRequestDTO.getBankAccountId()).orElseThrow(() -> new RuntimeException("Account not found"));
+        BankAccount account = accountRepository.findByAccountNumber(cardRequestDTO.getAccountNumber()).orElseThrow(() -> new RuntimeException("Account not found"));
 
         Card card = new Card();
         card.setCardNumber(generateUniqueCardNumber());
@@ -133,7 +132,7 @@ public class CardService {
         Card card = cardRepository.findById(dto.getCardId())
                 .orElseThrow(() -> new RuntimeException("Card not found"));
 
-        if (!card.getBankAccount().getId().equals(dto.getBankAccountId())) {
+        if (!card.getBankAccount().getAccountNumber().equals(dto.getAccountNumber())) {
             throw new RuntimeException("Card does not belong to the provided bank account.");
         }
 
@@ -142,7 +141,9 @@ public class CardService {
     }
 
     public CardResponseDTO approveCard(CardRequestDTO dto) {
-        List<Card> cards = cardRepository.findAllByBankAccountId(dto.getBankAccountId());
+        BankAccount bankAccount = accountRepository.findByAccountNumber(dto.getAccountNumber())
+                .orElseThrow(() -> new RuntimeException("Bank account not found"));
+        List<Card> cards = cardRepository.findAllByBankAccountId(bankAccount.getId());
         if (!cards.isEmpty()) {
             Card card = cards.getFirst();
             card.setCardNumber(generateUniqueCardNumber());
