@@ -27,7 +27,7 @@ public class Deposit {
     private DepositStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "accout_id")
+    @JoinColumn(name = "account_id", nullable = false)
     private BankAccount bankAccount;
 
     @PrePersist
