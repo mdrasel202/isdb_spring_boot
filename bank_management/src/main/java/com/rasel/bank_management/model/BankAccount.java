@@ -1,7 +1,6 @@
 package com.rasel.bank_management.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rasel.bank_management.constants.AccountStatus;
 import com.rasel.bank_management.constants.AccountType;
@@ -40,10 +39,7 @@ public class BankAccount {
     @JsonManagedReference
     private List<Card> cards;
 
-//    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Transactions> transactions;
-
-    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true,  fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Transaction> transaction;
 
@@ -51,7 +47,7 @@ public class BankAccount {
     @JsonManagedReference
     private List<Loan> loans;
 
-    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Deposit> deposits;
 
