@@ -17,6 +17,7 @@ public class CardResponseDTO {
     private CardType cardType;
     private CardStatus cardStatus;
     private LocalDate expiry_date;
+    private String accountNumber;
 
     private Long accountId;
     private BigDecimal availableBalance;

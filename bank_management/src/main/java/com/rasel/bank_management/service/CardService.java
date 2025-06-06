@@ -167,6 +167,7 @@ public class CardService {
         dto.setId(card.getId());
         dto.setCardType(card.getCard());
         dto.setAccountId(card.getBankAccount().getId());
+        dto.setAccountNumber(card.getBankAccount().getAccountNumber());
         return dto;
     }
 
@@ -206,6 +207,7 @@ public class CardService {
         dto.setExpiry_date(card.getExpiry_date());
         dto.setAccountId(card.getBankAccount().getId());
         dto.setAvailableBalance(card.getBankAccount().getAvailableBalance());
+        dto.setAccountNumber(card.getBankAccount().getAccountNumber());
         return dto;
     }
 
