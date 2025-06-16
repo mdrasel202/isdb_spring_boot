@@ -1,13 +1,12 @@
 package com.rasel.bank_management.model;
 
+import com.rasel.bank_management.constants.BankDepositInterestRate;
 import com.rasel.bank_management.constants.BankDepositStatus;
-import com.rasel.bank_management.constants.DepositInterestRate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.internal.util.privilegedactions.LoadClass;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -27,10 +26,12 @@ public class BankDeposit {
     private BigDecimal depositAmount;
 
     @Enumerated(EnumType.STRING)
-    private DepositInterestRate interestRate;
+    private BankDepositInterestRate bankDepositInterestRate;
 
     @Column(nullable = false)
     private BigDecimal interestEarned;
+
+    private double interestRate;
 
     @Column(nullable = false)
     private LocalDate startDate;

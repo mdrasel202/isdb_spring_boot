@@ -14,13 +14,16 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/bankdeposit")
 public class BankDepositController {
-    @Autowired
-    private BankDepositService bankDepositService;
+    private final BankDepositService bankDepositService;
+
+    public BankDepositController(BankDepositService bankDepositService) {
+        this.bankDepositService = bankDepositService;
+    }
 
     @PostMapping("/create")
-    public ResponseEntity<BankAccountResponseDTO> requests(@RequestBody BankDepositRequestDTO requestDTO){
+    public ResponseEntity<BankDepositResponseDTO> requests(@RequestBody BankDepositRequestDTO requestDTO){
 //        BankDepositResponseDTO getRequests = bankDepositService.requests(requestDTO);
-        return ResponseEntity.ok(bankDepositService.requests(requestDTO));
+        return ResponseEntity.ok(bankDepositService.request(requestDTO));
     }
 
     @GetMapping("/account/{accountNumber}")
