@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BankDepositService {
@@ -70,6 +71,22 @@ public class BankDepositService {
 
     //Get All
     public List<BankDepositResponseDTO> getAlls(String accountNumber) {
-        return null;
+        List<BankDeposit> deposits = bankDepositRepository.findByAccountNumber(accountNumber);
+        return deposits.stream()
+                .map(deposit -> {
+                    BankDepositResponseDTO response = new BankDepositResponseDTO();
+                    response.setId(deposit.getId());
+                    response.setAccountNumber(deposit.getBankAccount().getAccountNumber());
+                    response.setDepositAmount(deposit.getDepositAmount());
+                    response.setInterestRate(deposit.getInterestRate());
+                    response.setInterestRateLabel(deposit.getIn());
+                    response.setInterestEarned(deposit.getInterestEarned());
+                    response.setBankDepositStatus(deposit.getBankDepositStatus());
+                    response.setStartDate(deposit.getStartDate());
+                    response.setMaturityDatel(deposit.getMaturityDatel());
+                    return response;
+                })
+                .collect(Collectors.toList());
+    }
     }
 }
