@@ -55,6 +55,10 @@ public class BankAccount {
     @JsonManagedReference
     private List<BankDeposit> bankDeposits;
 
+    @OneToMany(mappedBy = "bankAccount", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<WithdrawalTransaction> withdrawalTransactions;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AccountType type;
