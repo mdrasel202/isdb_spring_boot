@@ -95,9 +95,9 @@ public class AccountService {
     //Transation
     @Transactional
     public void transferBalance(TransferRequestDTO request) {
-        BankAccount fromAccount = accountRepository.findById(request.getFromAccountId())
+        BankAccount fromAccount = accountRepository.findByAccountNumber(request.getFromAccountNumber())
                 .orElseThrow(() -> new RuntimeException("Sender account not found"));
-        BankAccount toAccount = accountRepository.findById(request.getToAccountId())
+        BankAccount toAccount = accountRepository.findByAccountNumber(request.getToAccountNumber())
                 .orElseThrow(() -> new RuntimeException("Receiver account not found"));
 
         BigDecimal amount = request.getAmount();

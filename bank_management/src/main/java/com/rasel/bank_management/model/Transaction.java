@@ -27,6 +27,8 @@ public class Transaction {
     private BigDecimal amount;
     private String description;
 
+
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "transaction_date")
     private LocalDate date;

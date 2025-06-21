@@ -41,6 +41,7 @@ public class WithdrawalService {
         withdrawalTransaction.setAmount(withdrawRequestDTO.getAmount());
         withdrawalTransaction.setTimestamp(LocalDateTime.now());
         withdrawalTransaction.setBankAccount(account);
+        withdrawalTransaction.setStatus("SUCCESS");
         withdrawalTransactionRepositotory.save(withdrawalTransaction);
 
         return "Withdrawal of" + withdrawRequestDTO.getAmount()+ "Successful";

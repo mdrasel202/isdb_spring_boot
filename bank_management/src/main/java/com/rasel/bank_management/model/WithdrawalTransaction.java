@@ -23,6 +23,7 @@ public class WithdrawalTransaction {
     private String accountNumber;
     private BigDecimal amount;
     private LocalDateTime timestamp;
+    private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_account_id")

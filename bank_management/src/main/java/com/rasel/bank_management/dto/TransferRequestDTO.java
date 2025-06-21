@@ -8,7 +8,9 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class TransferRequestDTO {
-    private Long fromAccountId;
-    private Long toAccountId;
+//    private Long fromAccountId;
+//    private Long toAccountId;
+    private String fromAccountNumber;
+    private String toAccountNumber;
     private BigDecimal amount;
 }
