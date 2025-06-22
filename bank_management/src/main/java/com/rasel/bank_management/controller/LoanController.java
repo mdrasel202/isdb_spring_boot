@@ -62,6 +62,16 @@ public class LoanController {
         return ResponseEntity.ok(loanService.CancelLoan(id));
     }
 
+    /**
+     * Get all loans in the system (admin view).
+     * GET /api/loans/admin/all
+     */
+    @GetMapping("/all")
+    public ResponseEntity<List<Loan>> getAllLoans(){
+        List<Loan> loans = loanService.getAllLoans();
+        return new ResponseEntity<>(loans, HttpStatus.OK);
+    }
+
 //    /**
 //     * Admin creates a loan manually.
 //     * POST /api/loans/admin/create
@@ -72,15 +82,6 @@ public class LoanController {
 //        return ResponseEntity.ok(loanService.adminCrateLoan(requestDTO));
 //    }
 //
-//    /**
-//     * Get all loans in the system (admin view).
-//     * GET /api/loans/admin/all
-//     */
-//    @GetMapping("/all")
-//    public ResponseEntity<List<Loan>> getAllLoans(){
-//        List<Loan> loans = loanService.getAllLoans();
-//        return new ResponseEntity<>(loans, HttpStatus.OK);
-//    }
 //
 //    /**
 //     * Get loan summary (totals, counts, etc).

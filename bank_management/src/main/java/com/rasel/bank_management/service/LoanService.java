@@ -102,7 +102,7 @@ public class LoanService {
 
         return saveLoan(loanRepository.save(loan));
     }
-
+    
     //cancle
     public LoanResponseDTO CancelLoan(Long loanId) {
         Loan loan = loanRepository.findById(loanId).orElseThrow();
@@ -124,81 +124,14 @@ public class LoanService {
         dto.setStatus(loan.getStatus());
         dto.setApplicationDate(loan.getApplicationDate());
         dto.setMonthlyInterest(loan.getMonthlyInterest());
+
         dto.setYearlyInterest(loan.getYearlyInterest());
-
-        // Safe calculation
-//        BigDecimal approvedAmount = loan.getApprovedAmount() != null ? loan.getApprovedAmount() : BigDecimal.ZERO;
-//        BigDecimal interestRate = loan.getInterestRate() != null ? loan.getInterestRate() : BigDecimal.ZERO;
-//
-//        BigDecimal yearlyInterest = approvedAmount
-//                .multiply(interestRate)
-//                .divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP);
-//
-//        BigDecimal monthlyInterest = yearlyInterest
-//                .divide(BigDecimal.valueOf(12), RoundingMode.HALF_UP);
-//
-//        dto.setYearlyInterest(yearlyInterest);
-//        dto.setMonthlyInterest(monthlyInterest);
-
 
         return dto;
     }
 
-//    /**
-//     * Admin creates a loan manually.
-//     * POST /api/loans/admin/create
-//     */
-//    public Loan adminCrateLoan(@Valid LoanRequestDTO requestDTO) {
-//       User user = userRepository.findById(requestDTO.getUserId()).orElseThrow(()-> new RuntimeException("User not found"));
-//       BankAccount bankAccount = accountRepository.findByAccountNumber(requestDTO.getAccountNumber()).orElseThrow(()-> new RuntimeException("Back account not found"));
-//
-//       Loan loan = new Loan();
-//       loan.setUser(user);
-//       loan.setBankAccount(bankAccount);
-//       loan.setAmount(requestDTO.getAmount());
-//       loan.setApprovedAmount(requestDTO.getAmount()); // Admin-approved
-//         loan.setInterestRate(requestDTO.getInterestRate());
-//         loan.setDueDate(requestDTO.getDueDate());
-//         loan.setStatus(LoanStatus.PAID);
-//         loan.setApplicationDate(LocalDate.now());
-//         loan.setAcceptDate(LocalDate.now());
-//         loan.setAvailableAmount(requestDTO.getAmount());
-//
-//         return loanRepository.save(loan);
-//    }
-//
-//    /**
-//     * Get all loans in the system (admin view).
-//     * GET /api/loans/admin/all
-//     */
-//    public List<Loan> getAllLoans() {
-//        List<Loan> loans = loanRepository.findAll();
-//        return loans;
-//    }
-//
-//    /**
-//     * Get loan summary (totals, counts, etc).
-//     * GET /api/loans/admin/summary
-//     */
-//    public Map<String, Object> getLoanSummary() {
-//        return null;
-//    }
-//
-//    /**
-//     * Get all loans for a specific user.
-//     * GET /api/loans/user/{userId}
-//     */
-//    public List<Loan> getLoanId(Integer userId) {
-//       return loanRepository.findByUserId(userId);
-//    }
-
-    /**
-     * Get loan details by loan ID.
-     * GET /api/loans/{loanId}
-     */
-//    public Loan getLoansId(Long loanId) {
-//        return loanRepository.findById(loanId).orElseThrow(() -> new RuntimeException("Loan not found"));
-//    }
-
+    public List<Loan> getAllLoans() {
+        return loanRepository.findAll();
+    }
 
 }
