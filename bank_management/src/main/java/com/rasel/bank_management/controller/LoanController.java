@@ -51,10 +51,11 @@ public class LoanController {
 
     //approved
     @PostMapping("/approved/{id}")
-    public ResponseEntity<LoanResponseDTO> postApproved(@PathVariable Long id, @RequestBody LoanApprovedDTO loanApprovedDTO){
-        LoanResponseDTO postAppr = loanService.postApprovedLoan(id,loanApprovedDTO.getAmount());
+    public ResponseEntity<LoanResponseDTO> postApproved(@PathVariable Long id, @RequestBody LoanApprovedDTO loanApprovedDTO) {
+        LoanResponseDTO postAppr = loanService.postApprovedLoan(id, loanApprovedDTO.getAmount());
         return new ResponseEntity<>(postAppr, HttpStatus.OK);
     }
+
 
     //cancle
     @PostMapping("/cancel/{id}")
