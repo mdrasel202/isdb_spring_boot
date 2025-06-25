@@ -56,4 +56,7 @@ public class WithdrawalService {
     public List<WithdrawalTransaction> getAll() {
         return withdrawalTransactionRepositotory.findAll();
     }
+
+
+
 }
