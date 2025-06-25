@@ -78,4 +78,10 @@ public class BankAccountController {
         return ResponseEntity.ok(transactions);
     }
 
+
+    // ✅ Get all transactions
+    @GetMapping("/getAlls")
+    public List<Transaction> getTransaction() {
+        return accountService.getTransactin();
+    }
 }
