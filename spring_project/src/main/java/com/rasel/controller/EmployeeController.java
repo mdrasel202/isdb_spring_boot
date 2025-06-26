@@ -1,32 +1,57 @@
 package com.rasel.controller;
 
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.rasel.service.FileStorageService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.rasel.model.Employee;
 import com.rasel.service.EmployeeService;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping(value = "/employee")
 public class EmployeeController {
 	private final EmployeeService service;
+	private final FileStorageService storageService;
 
-	public EmployeeController(EmployeeService service) {
+	public EmployeeController(EmployeeService service, FileStorageService storageService) {
 		this.service = service;
+		this.storageService = storageService;
 	}
 
 	@PostMapping
 	public Employee saveEmp(@RequestBody Employee employee) {
 		Employee savedEmp = service.saveEmployee(employee);
 		return savedEmp;
+	}
+
+	@PostMapping("/{employeeId}/upload")
+	public ResponseEntity<?> uploadFile(@PathVariable Integer employeeId,
+										@RequestParam("file")MultipartFile file){
+		try{
+			String savedFileName = storageService.storeFile(file);
+
+			String accessUrl = ServletUriComponentsBuilder
+					.fromCurrentContextPath()
+					.path("/imageurl/")
+					.path(savedFileName)
+					.toUriString();
+
+			Employee empById = service.getEmpById(employeeId);
+			empById.setImage(accessUrl);
+
+			service.updateEmp(employeeId, empById);
+
+			return ResponseEntity.ok(Map.of("message", "File uploaded", "url", accessUrl));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(Map.of("error", e.getMessage()));
+		}
 	}
 
 //	@GetMapping("/{id}")

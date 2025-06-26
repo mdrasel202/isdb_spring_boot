@@ -40,6 +40,7 @@ public class EmployeeRepository {
 		parameters.put("address", employee.getAddress());
 		parameters.put("dob", employee.getDob());
 		parameters.put("salary", employee.getSalary());
+		parameters.put("image", employee.getImage());
 
 		Number key = employeeInsert.executeAndReturnKey(parameters);
 		return key.intValue();
@@ -61,7 +62,7 @@ public class EmployeeRepository {
 
 	public int update(Employee employee) {
 		String sql = "UPDATE employee_spj SET name = ?, email = ?, designation = ?, "
-				+ "age = ?, address = ?, dob = ?, salary = ? WHERE id = ?";
+				+ "age = ?, address = ?, dob = ?, salary = ?, image = ?  WHERE id = ?";
 
 		return jdbcTemplate.update(sql, employee.getName(), employee.getEmail(), employee.getDesignation(),
 				employee.getAge(), employee.getAddress(), employee.getDob(), employee.getSalary(), employee.getId());
@@ -88,7 +89,9 @@ public class EmployeeRepository {
 		public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("email"),
 					rs.getString("designation"), rs.getInt("age"), rs.getString("address"),
-					rs.getObject("dob", LocalDate.class), rs.getDouble("salary"));
+					rs.getObject("dob", LocalDate.class), rs.getDouble("salary"),
+					rs.getString("image"));
+
 		}
 	}
 
@@ -122,7 +125,7 @@ public class EmployeeRepository {
 					// Set the ID in the employee object
 					Employee savedEmployee = new Employee(id, employee.getName(), employee.getEmail(),
 							employee.getDesignation(), employee.getAge(), employee.getAddress(), employee.getDob(),
-							employee.getSalary());
+							employee.getSalary(), employee.getImage());
 
 					return savedEmployee;
 				} else {

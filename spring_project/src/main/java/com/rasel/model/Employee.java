@@ -13,12 +13,13 @@ public class Employee {
 //	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dob;
 	private double salary;
+	private String image;
 
 	public Employee() {
 	}
 
 	public Employee(int id, String name, String email, String designation, int age, String address, LocalDate dob,
-			double salary) {
+			double salary, String image) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -93,4 +94,11 @@ public class Employee {
 		this.salary = salary;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 }
