@@ -37,22 +37,22 @@ public class BankDepositController {
     }
 
     //Admin approve deposit
-    @PutMapping("/approve/{id}")
-    public ResponseEntity<String> approve(@PathVariable Long id){
-        bankDepositService.updateStatus(id, BankDepositStatus.APPROVED);
-        return ResponseEntity.ok("Deposit approved");
-    }
+//    @PutMapping("/approve/{id}")
+//    public ResponseEntity<String> approve(@PathVariable Long id){
+//        bankDepositService.updateStatus(id);
+//        return ResponseEntity.ok("Deposit approved");
+//    }
 
     //Admin cancels deposit
-    @PutMapping("/cancel/{id}")
-    public ResponseEntity<String> cancel(@PathVariable Long id){
-        bankDepositService.updateStatus(id, BankDepositStatus.CANCELLED);
-        return ResponseEntity.ok("Deposit cancelled");
-    }
+//    @PutMapping("/cancel/{id}")
+//    public ResponseEntity<String> cancel(@PathVariable Long id){
+//        bankDepositService.updateStatus(id, BankDepositStatus);
+//        return ResponseEntity.ok("Deposit cancelled");
+//    }
 
     //Admin view all pending deposit
-     @GetMapping("/pending")
-    public ResponseEntity<List<BankDepositResponseDTO>> panding(){
-        return ResponseEntity.ok(bankDepositService.getPending());
-     }
+//     @GetMapping("/pending")
+//    public ResponseEntity<List<BankDepositResponseDTO>> panding(){
+//        return ResponseEntity.ok(bankDepositService.getPending());
+//     }
 }

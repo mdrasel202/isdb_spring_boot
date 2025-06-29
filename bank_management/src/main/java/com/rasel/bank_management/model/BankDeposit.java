@@ -25,22 +25,12 @@ public class BankDeposit {
     @Column(nullable = false)
     private BigDecimal depositAmount;
 
-    @Enumerated(EnumType.STRING)
-    private BankDepositInterestRate bankDepositInterestRate;
-
     @Column(nullable = false)
-    private BigDecimal interestEarned;
-
-    private double interestRate;
-
-    @Column(nullable = false)
-    private LocalDate startDate;
+    private LocalDate depositDate;
 
     @Enumerated(EnumType.STRING)
-    private BankDepositStatus bankDepositStatus = BankDepositStatus.PENDING;
+    private BankDepositStatus bankDepositStatus;
 
-    @Column(nullable = false)
-    private LocalDate maturityDatel;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", nullable = false)

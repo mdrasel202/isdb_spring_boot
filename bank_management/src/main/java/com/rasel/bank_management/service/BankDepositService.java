@@ -30,44 +30,25 @@ public class BankDepositService {
     public BankDepositResponseDTO request(BankDepositRequestDTO requestDTO) {
         BankAccount bankAccount = accountRepository.findByAccountNumber(requestDTO.getAccountNumber())
                 .orElseThrow(() -> new RuntimeException("Account not found"));
-        if(bankAccount.getBalance().compareTo(requestDTO.getDepositAmount()) < 0){
-            throw new RuntimeException("Insufficient balance");
-        }
 
-        bankAccount.setBalance(bankAccount.getBalance().subtract(requestDTO.getDepositAmount()));
+        bankAccount.setAvailableBalance(bankAccount.getAvailableBalance().add(requestDTO.getDepositAmount()));
         accountRepository.save(bankAccount);
 
-        double rate = requestDTO.getBankDepositInterestRate().getRate();
-        String rateLabel = requestDTO.getBankDepositInterestRate().getLabel();
         LocalDate start = LocalDate.now();
-        LocalDate maturity = start.plusYears(1);
-
-        BigDecimal interest = requestDTO.getDepositAmount()
-                .multiply(BigDecimal.valueOf(rate))
-                .setScale(2, RoundingMode.HALF_UP);
 
         BankDeposit bankDeposit = new BankDeposit();
         bankDeposit.setBankAccount(bankAccount);
         bankDeposit.setDepositAmount(requestDTO.getDepositAmount());
-        bankDeposit.setBankDepositInterestRate(requestDTO.getBankDepositInterestRate());
-        bankDeposit.setInterestRate(rate);
-        bankDeposit.setInterestEarned(interest);
         bankDeposit.setBankDepositStatus(requestDTO.getBankDepositStatus());
-        bankDeposit.setStartDate(start);
-        bankDeposit.setMaturityDatel(maturity);
+        bankDeposit.setDepositDate(start);
         bankDepositRepository.save(bankDeposit);
 
         BankDepositResponseDTO response = new BankDepositResponseDTO();
         response.setId(bankDeposit.getId());
         response.setAccountNumber(bankAccount.getAccountNumber());
         response.setDepositAmount(bankDeposit.getDepositAmount());
-        response.setInterestRate(rate);
-        response.setInterestRateLabel(rateLabel);
-        response.setInterestEarned(interest);
         response.setBankDepositStatus(bankDeposit.getBankDepositStatus());
-        response.setStartDate(start);
-        response.setMaturityDatel(maturity);
-
+        response.setDepositDate(bankDeposit.getDepositDate());
         return response;
     }
 
@@ -79,37 +60,27 @@ public class BankDepositService {
     }
 
     //Admin approve deposit  Admin cancels deposit
-    public void updateStatus(Long id, BankDepositStatus bankDepositStatus) {
-        BankDeposit deposit = bankDepositRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Deposit not found"));
-        deposit.setBankDepositStatus(bankDepositStatus);
-        bankDepositRepository.save(deposit);
-    }
+//    public void updateStatus(Long id, BankDepositStatus bankDepositStatus) {
+//        BankDeposit deposit = bankDepositRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Deposit not found"));
+//        deposit.setBankDepositStatus(bankDepositStatus);
+//        bankDepositRepository.save(deposit);
+//    }
 
-    //Pending
-    public List<BankDepositResponseDTO> getPending() {
-        return bankDepositRepository.findByBankDepositStatus(BankDepositStatus.PENDING).stream()
-                .map(this::toDTO)
-                .collect(Collectors.toList());
-    }
+//    //Pending
+//    public List<BankDepositResponseDTO> getPending() {
+//        return bankDepositRepository.findByBankDepositStatus(BankDepositStatus.PENDING).stream()
+//                .map(this::toDTO)
+//                .collect(Collectors.toList());
+//    }
 
     private BankDepositResponseDTO toDTO(BankDeposit deposit) {
         BankDepositResponseDTO response = new BankDepositResponseDTO();
         response.setId(deposit.getId());
         response.setAccountNumber(deposit.getBankAccount().getAccountNumber());
         response.setDepositAmount(deposit.getDepositAmount());
-        response.setInterestRate(deposit.getInterestRate());
-
-        if (deposit.getBankDepositInterestRate() != null) {
-            response.setInterestRateLabel(deposit.getBankDepositInterestRate().getLabel());
-        } else {
-            response.setInterestRateLabel(deposit.getInterestRate() * 100 + "%");
-        }
-
-        response.setInterestEarned(deposit.getInterestEarned());
         response.setBankDepositStatus(deposit.getBankDepositStatus());
-        response.setStartDate(deposit.getStartDate());
-        response.setMaturityDatel(deposit.getMaturityDatel());
+        response.setDepositDate(deposit.getDepositDate());
         return response;
     }
 

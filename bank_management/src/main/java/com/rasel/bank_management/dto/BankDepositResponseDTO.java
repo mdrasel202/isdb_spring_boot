@@ -13,13 +13,6 @@ public class BankDepositResponseDTO {
     private Long id;
     private String accountNumber;
     private BigDecimal depositAmount;
-    private BigDecimal interestEarned;
-
-    private double interestRate;
-    private String interestRateLabel;
-
     private BankDepositStatus bankDepositStatus;
-    private LocalDate startDate;
-    private LocalDate maturityDatel;
-
+    private LocalDate depositDate;
 }

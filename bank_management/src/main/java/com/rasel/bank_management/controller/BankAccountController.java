@@ -53,18 +53,6 @@ public class BankAccountController {
         return ResponseEntity.ok(accountService.approveAccount(id));
     }
 
-    //update
-//    @PutMapping("/{id}/status")
-//    public ResponseEntity<BankAccountResponseDTO> updateStatus(
-//            @PathVariable Long id,
-//            @RequestBody Map<String, String> payload) {
-//
-//        String status = payload.get("status");
-//        BankAccountResponseDTO updated = accountService.updateAccountStatus(id, status);
-//        return ResponseEntity.ok(updated);
-//    }
-
-
     //Transation
     @PostMapping("/transfer")
     public ResponseEntity<String> transfer(@RequestBody TransferRequestDTO request) {
@@ -77,7 +65,6 @@ public class BankAccountController {
         List<Transaction> transactions = accountService.getTransactionsForAccount(accountId);
         return ResponseEntity.ok(transactions);
     }
-
 
     // ✅ Get all transactions
     @GetMapping("/getAlls")
