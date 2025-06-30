@@ -58,22 +58,6 @@ public class BankDepositService {
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
-
-    //Admin approve deposit  Admin cancels deposit
-//    public void updateStatus(Long id, BankDepositStatus bankDepositStatus) {
-//        BankDeposit deposit = bankDepositRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Deposit not found"));
-//        deposit.setBankDepositStatus(bankDepositStatus);
-//        bankDepositRepository.save(deposit);
-//    }
-
-//    //Pending
-//    public List<BankDepositResponseDTO> getPending() {
-//        return bankDepositRepository.findByBankDepositStatus(BankDepositStatus.PENDING).stream()
-//                .map(this::toDTO)
-//                .collect(Collectors.toList());
-//    }
-
     private BankDepositResponseDTO toDTO(BankDeposit deposit) {
         BankDepositResponseDTO response = new BankDepositResponseDTO();
         response.setId(deposit.getId());

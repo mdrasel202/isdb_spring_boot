@@ -163,7 +163,6 @@ public class AccountService {
         return dto;
     }
 
-    // ✅ Get all transactions from the repository
     public List<Transaction> getTransactin() {
         return transactionRepository.findAll();
     }
