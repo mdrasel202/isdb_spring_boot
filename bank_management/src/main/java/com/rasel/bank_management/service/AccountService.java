@@ -137,10 +137,6 @@ public class AccountService {
         return transactionRepository.findByBankAccountId(accountId);
     }
 
-//    public List<BankAccountResponseDTO> findAllAccount() {
-//        return accountRepository.findAll();
-//    }
-
 
     //get all
     public List<BankAccountResponseDTO> findAllAccount() {
